@@ -1,0 +1,25 @@
+<h1>Listing accommodation_unitrails</h1>
+
+<table>
+
+  <tr>
+    <th>City</th>
+    <th>Description</th>
+    <th>Price</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+	
+	
+	
+	<% @accommodation_unitrails.each do |accommodation_unitrail| %>
+	<tr class="list_description">
+
+	<td><%= accommodation_unitrail.city %></td>
+    <td><%= accommodation_unitrail.description %></td>
+    <td><%= accommodation_unitrail.price %></td>
+     <td><%= accommodation_unitrail.email %></td>
+	</tr>
+	<% end %>
+</table>

@@ -1,0 +1,32 @@
+// Place all the styles related to the Accommodation_unitrails controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.accommodation{
+  table{
+    border-collapse: collapse;
+  }
+  
+  table tr td {
+    padding: 5px;
+    vertical-align:top;
+  }
+  
+  .list_description{
+    width:60%;
+    
+    dl{
+      margin:60%;
+    }
+    
+    dt{
+      color:#244;
+      font-weight:bold;
+      font-size:larger;
+    }
+    
+    dd{
+      margin:0;
+    }
+  }
+}

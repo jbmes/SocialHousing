@@ -1,0 +1,43 @@
+
+<table style="border: 1px solid #427BD6; text-align:center;" height="22" width="100%" border="0" cellspacing="1" cellpadding="0">
+	<tr bgcolor="#57caff">
+		<td width="16%"><a class="textlink03" href="/search/find_entrys">Search</a></td>
+		<td width="16%"><a class="textlink03" href="/create_new_entry/new_entry">NEW accommodation</a></td>
+		<td width="16%"><a class="textlink03" href="#">NEW accommodation</a></td>
+	</tr>
+</table>
+
+<h1>Wohneinheiten </h1>
+
+<p>Es wurden <%= @results_amount %> Wohneinheiten gefunden.</p>
+<p>Workingvalue <%= @working_value %> </p>
+	<table border="1" cellspacing="0" cellpadding="4" width="100%">
+		<colgroup>
+		<col width="4*" />
+		<col width="2*" />
+		<col width="1*" />
+		<col width="1*" />
+		</colgroup>
+	
+	<tr>
+    <td><h3>Name</h3></td>
+	<td><h3>Stadt</h3></td>
+	<td><h3>Internetadresse</h3></td>
+	<td><h3>Aktion</h3></td>
+   
+	</tr>
+	<% @results.each do |accommodation_unitrail| %>
+
+	<tr>
+    <td><%= accommodation_unitrail.name %></td>
+	<td><%= accommodation_unitrail.city %></td>
+	<td><a href="<%= accommodation_unitrail.internetadress %>" target="_blank"><%= accommodation_unitrail.internetadress %></a></td>
+	<td><%= link_to "Details",:controller => "entry",:action => "show_entry",:id =>accommodation_unitrail.id %><br>
+   		<a href="" target="_blank">Bearbeiten</a><br>
+   		<a href="" target="_blank">Löschen</a>
+   </td>
+   
+	</tr>
+	
+	<% end %>
+</table>

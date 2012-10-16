@@ -1,0 +1,83 @@
+
+  
+  
+
+  #------------------------------------------------------------------------------
+  Funktionalität Detailansicht einer Wohneinheit
+  
+  Szenario Aufruf einer Detailansicht einer Wohneinheit
+  
+  Angenommen ich befinde mich auf der "Wohneinheitenseite"
+  
+  Wenn ich auf eine Wohneinten in der Liste klicke
+  
+  Dann erscheint die Detailansicht der angeklickten Wohneinheit
+  #------------------------------------------------------------------------------
+
+Funktionalität neue Wohnheit anlegen
+Als Benutzer kann ich keine neue Wohneinheit anlegen wenn die Adresse nicht vollständig ist
+
+Szenario Anlegen einer neuen Wohneinheit mit fehlenden Adressdaten
+
+Angenommen ich befinde mich auf der "Wohneinheitenseite"
+Und habe auf "Wohneiheiten anlegen" geklickt
+
+Wenn ich den Namen in die Maske angelegt habe
+Und die Ortschaft eingetragen habe
+Und den "anlegen/speichern"    drücke 
+
+Dann erscheint ein Hinweis "Es können nur Wohneinheiten mit ganzer Adresse gesichert werden"  
+#-----------------------------------------------------------------------------
+Funktionalität neue Wohnheit anlegen
+
+Als ein Benutzer möchte ich eine neue Wohneinheit anlegen um sie später wieder zu finden
+
+Szenario Anlegen einer Wohneinheit
+
+Angenommen ich befinde mich auf der Wohnneinheitenseite 
+
+wenn ich auf "Wohneiheiten anlegen" klicke 
+Und Name = Paulhotel 
+Und Anschrift Blumenstraße 104 ,01307 Dresden  eingebe
+Und  "Busunternehmen vorhanden" aktiviere 
+Und   "Arbeitraum vorhanden" aktiviere
+Und "anlegen/speichern"    drücke
+
+Dann befinde ich mich auf der Wohneinheitenseite 
+und sehe den neuen Eintrag
+#------------------------------------------------------------------------------
+Funktionalität neue Wohnheit anlegen
+
+Szenario    Anlegen einer Wohneiheit mit 5 speziellen Eigenschaften
+
+Angenommen ich befinde mich auf der "Wohneinheitenseite"
+
+Wenn ich auf "Wohneiheiten anlegen" klicke
+Und Name = Sportstätte Riesenbaum  eingebe
+Und Anschrift Takatukastraße ,01307 TakatukaLand  eingebe
+Und  "Busunternehmen vorhanden" aktiviere 
+Und   "Arbeitraum vorhanden" aktiviere
+Und  "Beamer vorhanden" aktiviere 
+Und   "Fernseher" aktiviere
+Und "anlegen/speichern"    drücke
+
+Dann befinde ich mich auf der Wohneinheitenseite 
+und sehe den neuen Eintrag
+
+#--------------------------------------------------------------------------------
+
+
+
+
+
+
+
+Funktionalität Eigenschaften einer Wohneinheit verändern
+
+Szenario Ändern der Eigenschaften einer Wohneinheit
+
+Angenommen ich befinde mich auf der "Wohneinheitenseite" und sehe dort alle Einträge untereinander
+
+Wenn ich eine Wohneiheit auswähle
+Und diese anklicke
+Und die 
