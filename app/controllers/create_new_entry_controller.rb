@@ -23,10 +23,18 @@ class CreateNewEntryController < ApplicationController
     @accommodation_unitrail.email = params[:email]
     @accommodation_unitrail.internetadress = params[:internetadress]
     @accommodation_unitrail.internet = params[:internet]
+    @accommodation_unitrail.description = params[:description]
     
-    @accommodation_unitrail.latitude = params[:latitude]
-    @accommodation_unitrail.longitude = params[:longitude]
-    @accommodation_unitrail.distance = calculate_distance(params[:latitude].to_f, params[:longitude].to_f, @dresden_latitude.to_f, @dresden_longitude.to_f)
+    
+   adress = params[:city] + " " + params[:street] + " " + params[:house_number].to_s + " " + params[:postal_code].to_s
+    
+    
+    
+    geo_vals = Geocoder.coordinates(adress.to_s)
+    @accommodation_unitrail.latitude = geo_vals[0]
+    @accommodation_unitrail.longitude = geo_vals[1]
+    
+    @accommodation_unitrail.distance = calculate_distance(geo_vals[0], geo_vals[1], @dresden_latitude.to_f, @dresden_longitude.to_f)
     
     @accommodation_unitrail.dvd_player = params[:dvd_player]
     @accommodation_unitrail.music_station = params[:music_station]
@@ -36,6 +44,35 @@ class CreateNewEntryController < ApplicationController
     @accommodation_unitrail.bedding = params[:bedding]
     @accommodation_unitrail.amount_of_lebenshilfe_stars = params[:amount_of_lebenshilfe_stars]
     @accommodation_unitrail.amount_of_rooms = params[:amount_of_rooms]
+    
+    @accommodation_unitrail.horse_riding = params[:horse_riding]
+    @accommodation_unitrail.bowling = params[:bowling]
+    @accommodation_unitrail.table_tennis = params[:table_tennis]
+    @accommodation_unitrail.kicker = params[:kicker]
+
+    @accommodation_unitrail.playground = params[:playground]
+    @accommodation_unitrail.outdoor_swimming_bath = params[:outdoor_swimming_bath]
+    
+    @accommodation_unitrail.natatorium = params[:natatorium]
+    @accommodation_unitrail.barrier_free = params[:barrier_free]
+    @accommodation_unitrail.wheelchair_accessible_bed = params[:wheelchair_accessible_bed]
+    @accommodation_unitrail.coster_bed = params[:coster_bed]
+    @accommodation_unitrail.lifter = params[:lifter]
+    @accommodation_unitrail.public_transfer_weelchair = params[:public_transfer_weelchair]
+    @accommodation_unitrail.public_transfer = params[:public_transfer]
+    
+    @accommodation_unitrail.shopping_facilities = params[:shopping_facilities]
+    @accommodation_unitrail.care_service = params[:care_service]
+    @accommodation_unitrail.self_supply = params[:self_supply]
+    @accommodation_unitrail.full_board = params[:full_board]
+    @accommodation_unitrail.max_group_size = params[:max_group_size]
+    
+    
+    
+    
+    
+    
+    
     
     @accommodation_unitrail.save
     id = @accommodation_unitrail.id

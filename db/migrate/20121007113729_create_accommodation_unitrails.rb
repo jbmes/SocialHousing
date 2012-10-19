@@ -19,7 +19,7 @@ class CreateAccommodationUnitrails < ActiveRecord::Migration
       t.float :latitude
       t.float :longitude
       t.float :distance
-      
+      t.float :max_group_size
       t.boolean :horse_riding
       t.boolean :bowling
       t.boolean :table_tennis

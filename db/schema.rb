@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(:version => 20121007113729) do
     t.float    "latitude"
     t.float    "longitude"
     t.float    "distance"
+    t.float    "max_group_size"
     t.boolean  "horse_riding"
     t.boolean  "bowling"
     t.boolean  "table_tennis"

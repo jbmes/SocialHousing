@@ -1,324 +1,340 @@
-<h1>Create new accommodation units </h1>
 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>Web Application</title>
+	<meta name="description" content="Web Application" />
+	<meta name="keywords" content="web, application" />
+	
+	<%= stylesheet_link_tag "main.css"%>
+</head>
+<body>
 
-
-<table style="border: 1px solid #427BD6; text-align:center;"
-height="22" width="100%" border="0" cellspacing="1" cellpadding="0">
-<tr bgcolor="#57caff">
-
-<td width="16%"><a class="textlink03" href="/search/find_entrys">Search</a></td>
-<td width="16%"><a class="textlink03" href="/create_new_entry/new_entry">NEW accommodation</a></td>
-<td width="16%"><a class="textlink03" href="#">NEW accommodation</a></td>
-</tr></table>
-
+	<div id="header">
+		<h1>Lebenshilfe Dresden e.V.</h1>
+		<ul id="menu">
+			<li ><a href="/search/find_entrys">Suche</a></li>
+			<li class="active"><a href="/create_new_entry/new_entry">Anlegen</a></li>
+			<li><a href="#">contact</a></li>
+		</ul>
+	</div>
+<div class="wrap">
 <form action="/create_new_entry/create_entry_from_formdata" method="post">
 	<table >
 		<tr>
-			<th ><h3>Anschrift</h3></th>
-			<th></th>
+			<td><h3>Anschrift</h3> <div class="red">(Pflichtfelder*)</div></td>
+			<td></td>
 		</tr>
 		<tr>
-			<th  align="left">
-			<input type="text" size="25" name="name">
-			Name Einrichtung
+			<td  align="left">
+			<%= text_field_tag 'name',value = nil, :min => 0, :max => 10, :required => true%>
+			Name Einrichtung*
 			<br>
-			</th>
-			<th  align="left"></th>
+			</td>
+			<td  align="left"></td>
 		</tr>
 		<tr>
-			<th  align="left">
-			<input type="text" size="25" name="contact_person">
-			Ansprechpartner
+			<td  align="left">
+			<%= text_field_tag 'contact_person',value = nil, :min => 0, :max => 10, :required => true%>
+			
+			Ansprechpartner*
 			<br>
-			</th>
-			<th  align="left">
-			<input type="text" size="25" name="tel_contact_person">
-			Tel. Ansprechpartner
+			</td>
+			<td  align="left">
+				<%= phone_field_tag 'tel_contact_person',value = nil, :min => 0, :max => 10, :required => true%>
+			
+			Tel. Ansprechpartner*
 			<br>
-			</th>
+			</td>
 		</tr>
 		<tr>
-			<th  align="left">
-			<input type="text" size="25" name="street">
-			Straße
+			<td  align="left">
+				<%= text_field_tag 'street',value = nil, :min => 0, :max => 10, :required => true%>
+			
+			Straße*
 			<br>
-			</th>
-			<th  align="left">
-			<input type="text" size="4" name="house_number">
-			Hausnr.
+			</td>
+			<td  align="left">
+			<%= number_field_tag 'house_number',value = nil, :min => 0, :max => 10, :required => true%>
+			Hausnr.*
 			<br>
-			</th>
+			</td>
 		</tr>
 		<tr>
-			<th  align="left">
-			<input type="text" size="25" name="city">
-			Stadt
+			<td  align="left">
+			<%= text_field_tag 'city',value = nil, :min => 0, :max => 10, :required => true%>
+			Stadt*
 			<br>
-			</th>
-			<th  align="left">
-			<input type="text" size="6" name="postal_code">
-			Postleitzahl
+			</td>
+			<td  align="left">
+			<%= number_field_tag 'postal_code',value = nil, :min => 0, :max => 10, :required => true%>
+			Postleitzahl*
 			<br>
-			</th>
+			</td>
 		</tr>
 		<tr>
-			<th ><h3>Kontakt</h3></th>
-			<th ></th>
+			<td ><h3>Kontakt</h3></td>
+			<td ></td>
 		</tr>
 		<tr>
-			<th  align="left">
+			<td  align="left">
 			<input type="text" name="email">
 			Email
 			<br>
-			</th>
-			<th  align="left">
+			</td>
+			<td  align="left">
 			<input type="text" name="internetadress">
 			Internetadresse
 			<br>
-			</th>
+			</td>
 		</tr>
 		<tr></tr>
 		<tr>
-			<th ><h3>weitere Eigenschaften</h3></th>
-			<th ></th>
+			<td ><h3>weitere Eigenschaften</h3></td>
+			<td ></td>
 		</tr>
 		
-		<tr style="background: blue;">
-			<th  align="left">			<textarea type="text" name="description"  cols="50" rows="10">  </textarea></th>
-			<th  align="left">
+		<tr>
+			<td  align="left">			<textarea type="text" name="description"  cols="50" rows="10">  </textarea></td>
+			<td  align="left">
 			<br>
 			Beschreibung
 			<br>
-			</th>
+			</td>
 		</tr>
 		<tr>
-			<th  align="left">
+			<td  align="left">
 			<input type="text" name="amount_of_rooms" value="1">
 			Anz. Zimmer
 			<br>
-			</th>
-			<th  align="left">
+			</td>
+			<td  align="left">
 			<input type="text" name="max_group_size">
 			max. Gruppengröße
 			<br>
-			</th>
+			</td>
 		</tr>
 		<tr>
-			<th  align="left">
-			<input type="text" name="-------" >
-			----------
+			<td  align="left">
+			<%= file_field_tag 'foto' %>
+			Foto
 			<br>
-			</th>
-			<th  align="left">
+			</td>
+			<td  align="left">
 			<input type="text" name="amount_of_lebenshilfe_stars">
 			Lebenshilfesterne
 			<br>
-			</th>
+			</td>
 		</tr>
 		<tr>
-			<th  align="left">
+			<td  align="left">
 			<input type="text" name="latitude" >
 			Latitude
 			<br>
-			</th>
-			<th  align="left">
+			</td>
+			<td  align="left">
 			<input type="text" name="longitude">
 			Longitude
 			<br>
-			</th>
+			</td>
 		</tr>
 		<tr>
-			<th ><h3>Vehrkersanbindung</h3></th>
-			<th ></th>
+			<td ><h3>Vehrkersanbindung</h3></td>
+			<td ></td>
 		</tr>
 		<tr>
-			<th  align="left">
-			<input type="checkbox" name="zutat" value="salami">
+			<td  align="left">
+			<input type="checkbox" name="public_transfer_weelchair" value="true">
 			örtliche Busunternehmen (Rollstuhlbusse)
 			<br>
-			</th>
-			<th  align="left">
-			<input type="checkbox" name="zutat" value="salami">
+			</td>
+			<td  align="left">
+			<input type="checkbox" name="public_transfer" value="true">
 			offentlich Verkehrsmittel
 			<br>
-			</th>
+			</td>
 		</tr>
 		<tr>
-			<th ><h3>In Einrichtung vorhanden</h3></th>
-			<th ></th>
+			<td ><h3>In Einrichtung vorhanden</h3></td>
+			<td ></td>
 		</tr>
 		<tr>
-			<th  align="left">
+			<td  align="left">
 			<input type="checkbox" name="internet" value="true">
 			Internet
 			<br>
-			</th>
-			<th  align="left">
-			<input type="checkbox" name="zutat" value="pilze">
+			</td>
+			<td  align="left">
+			<input type="checkbox" name="television" value="true">
 			Fernseher
 			<br>
-			</th>
+			</td>
 		</tr>
 		<tr>
-			<th  align="left">
-			<input type="checkbox" name="zutat" value="salami">
+			<td  align="left">
+			<input type="checkbox" name="beamer" value="true">
 			Beamer
 			<br>
-			</th>
-			<th  align="left">
-			<input type="checkbox" name="zutat" value="pilze">
+			</td>
+			<td  align="left">
+			<input type="checkbox" name="grouproom" value="true">
 			Gruppenraum
 			<br>
-			</th>
+			</td>
 		</tr>
 		<tr>
-			<th  align="left">
-			<input type="checkbox" name="zutat" value="salami">
+			<td  align="left">
+			<input type="checkbox" name="music_station" value="true">
 			Musikanlage
 			<br>
-			</th>
-			<th  align="left">
-			<input type="checkbox" name="zutat" value="pilze">
+			</td>
+			<td  align="left">
+			<input type="checkbox" name="bedding" value="true">
 			Bettwäsche
 			<br>
-			</th>
+			</td>
 		</tr>
 		<tr>
-			<th  align="left">
-			<input type="checkbox" name="zutat" value="salami">
+			<td  align="left">
+			<input type="checkbox" name="dvd_player" value="true">
 			DVD-Player
 			<br>
-			</th>
-			<th  align="left"></th>
+			</td>
+			<td  align="left"></td>
 		</tr>
 		<tr>
-			<th ><h3>Freizeitbeschäftigungen</h3></th>
-			<th ></th>
+			<td ><h3>Freizeitbeschäftigungen</h3></td>
+			<td ></td>
 		</tr>
 		<tr>
-			<th  align="left">
-			<input type="checkbox" name="zutat" value="salami">
+			<td  align="left">
+			<input type="checkbox" name="playground" value="true">
 			Spielplatz
 			<br>
-			</th>
-			<th  align="left">
-			<input type="checkbox" name="zutat" value="pilze">
+			</td>
+			<td  align="left">
+			<input type="checkbox" name="kicker" value="true">
 			Kicker
 			<br>
-			</th>
+			</td>
 		</tr>
 		<tr>
-			<th  align="left">
-			<input type="checkbox" name="zutat" value="salami">
+			<td  align="left">
+			<input type="checkbox" name="table_tennis" value="true">
 			Tischtennis
 			<br>
-			</th>
-			<th  align="left">
-			<input type="checkbox" name="zutat" value="pilze">
+			</td>
+			<td  align="left">
+			<input type="checkbox" name="bowling" value="true">
 			Bowling
 			<br>
-			</th>
+			</td>
 		</tr>
 		<tr>
-			<th  align="left">
-			<input type="checkbox" name="zutat" value="salami">
+			<td  align="left">
+			<input type="checkbox" name="horse_riding" value="true">
 			Reitmöglichkeit
 			<br>
-			</th>
-			<th  align="left">
-			<input type="checkbox" name="zutat" value="pilze">
+			</td>
+			<td  align="left">
+			<input type="checkbox" name="natatorium" value="true">
 			Schwimmhalle
 			<br>
-			</th>
+			</td>
 		</tr>
 		<tr>
-			<th  align="left">
-			<input type="checkbox" name="zutat" value="salami">
+			<td  align="left">
+			<input type="checkbox" name="outdoor_swimming_batd" value="true">
 			Freibad / See
 			<br>
-			</th>
-			<th  align="left"></th>
+			</td>
+			<td  align="left"></td>
 		</tr>
 		<tr>
-			<th ><h3>Behindertengerecht</h3></th>
-			<th ></th>
+			<td ><h3>Behindertengerecht</h3></td>
+			<td ></td>
 		</tr>
 		<tr>
-			<th  align="left">
-			<input type="checkbox" name="zutat" value="salami">
+			<td  align="left">
+			<input type="checkbox" name="lifter" value="true">
 			Lifter
 			<br>
-			</th>
-			<th  align="left"></th>
+			</td>
+			<td  align="left"></td>
 		</tr>
 		<tr>
-			<th  align="left">
-			<input type="checkbox" name="zutat" value="salami">
+			<td  align="left">
+			<input type="checkbox" name="coster_bed" value="true">
 			Pflegebett
 			<br>
-			</th>
-			<th  align="left"></th>
+			</td>
+			<td  align="left"></td>
 		</tr>
 		<tr>
-			<th  align="left">
-			<input type="checkbox" name="zutat" value="salami">
+			<td  align="left">
+			<input type="checkbox" name="wheelchair_accessible_bed" value="true">
 			rollstuhlgerechte Betten
 			<br>
-			</th>
-			<th  align="left"></th>
+			</td>
+			<td  align="left"></td>
 		</tr>
 		<tr>
-			<th  align="left">
-			<input type="checkbox" name="zutat" value="salami">
+			<td  align="left">
+			<input type="checkbox" name="barrier_free" value="true">
 			Barrierefrei
 			<br>
-			</th>
-			<th  align="left"></th>
+			</td>
+			<td  align="left"></td>
 		</tr>
 		<tr>
-			<th ><h3>Einrichtungen in der Nähe</h3></th>
-			<th ></th>
+			<td ><h3>Einrichtungen in der Nähe</h3></td>
+			<td ></td>
 		</tr>
 		<tr>
-			<th  align="left">
-			<input type="checkbox" name="zutat" value="salami">
+			<td  align="left">
+			<input type="checkbox" name="care_service" value="true">
 			Pflegedienst vor Ort
 			<br>
-			</th>
-			<th  align="left"></th>
+			</td>
+			<td  align="left"></td>
 		</tr>
 		<tr>
-			<th  align="left">
-			<input type="checkbox" name="zutat" value="salami">
+			<td  align="left">
+			<input type="checkbox" name="shopping_facilities" value="true">
 			Einkaufmöglichkeiten (5km Radius)
 			<br>
-			</th>
-			<th  align="left"></th>
+			</td>
+			<td  align="left"></td>
 		</tr>
 		<tr>
-			<th ><h3>Verpflegung</h3></th>
-			<th ></th>
+			<td ><h3>Verpflegung</h3></td>
+			<td ></td>
 		</tr>
 		<tr>
-			<th  align="left">
-			<input type="checkbox" name="zutat" value="salami">
+			<td  align="left">
+			<input type="checkbox" name="full_board" value="true">
 			Vollverpflegung
 			<br>
-			</th>
-			<th  align="left"></th>
+			</td>
+			<td  align="left"></td>
 		</tr>
 		<tr>
-			<th  align="left">
-			<input type="checkbox" name="zutat" value="salami">
+			<td  align="left">
+			<input type="checkbox" name="self_supply" value="true">
 			Selbstversorgung
 			<br>
-			</th>
-			<th  align="left"></th>
+			</td>
+			<td  align="left"></td>
 		</tr>
 		<tr>
-			<input type="submit" value="Erstellen" />
-			<input type="reset" value="Abbrechen" />
-		</tr>
+		
+		<td> <%= image_submit_tag("check32.png")%></td>
+	</tr>
+
 	</table>
   
 </form>
+</div>
+</body>
+</html>
