@@ -1,0 +1,34 @@
+<%= form_for(@accommodation_unitrail) do |f| %>
+  <% if @accommodation_unitrail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@accommodation_unitrail.errors.count, "error") %> prohibited this accommodation_unitrail from being saved:</h2>
+
+      <ul>
+      <% @accommodation_unitrail.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :city %><br />
+    <%= f.text_field :city %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description, rows:6 %>
+  </div>
+  <div class="field">
+    <%= f.label :price %><br />
+    <%= f.text_field :price %>
+  </div>
+  
+    <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,347 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>Web Application</title>
+	<%= stylesheet_link_tag "main.css"%>
+</head>
+<body>
+
+
+	<div id="header">
+		<h1>Lebenshilfe Dresden e.V.</h1>
+		<ul id="menu">
+			<li><a href="/search/find_entrys">Suche</a></li>
+			<li><a href="/create_new_entry/new_entry">Anlegen</a></li>
+			<li><a href="#">contact</a></li>
+		</ul>
+	</div>
+
+<div class="wrap">
+	<table >
+		<tr>
+			<td ><h3>Anschrift</h3></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td  align="left">
+			<font size="4">
+			<small><i>Name:</i></small>
+			</font>
+			<font align=right><%= @accommodation_unitrail.name %></font>
+			</td>
+			<td  align="left"></td>
+		</tr>
+		<tr>
+			<td  align="left">
+			<font size="4">
+			<small><i>Ansprechpartner:</i></small>
+			</font>
+			<font align=right><%= @accommodation_unitrail.contact_person %></font>
+			</td>
+			<td  align="left">
+			<font size="4">
+			<small><i>Tel. Ansprechpartner</i></small>
+			</font>
+			<font align=right><%= @accommodation_unitrail.tel_contact_person %></font>
+			</td>
+		</tr>
+		<tr>
+			<td  align="left">
+			<font size="4">
+			<small><i>Straße:</i></small>
+			</font>
+			<font align=right><%= @accommodation_unitrail.street %></font>
+			</td>
+			<td  align="left">
+				<font size="4">
+			<small><i>HauseNr:</i></small>
+			</font>
+			<font align=right><%= @accommodation_unitrail.house_number %></font>
+			</td>
+		</tr>
+		<tr>
+			<td  align="left">
+			<font size="4">
+			<small><i>Stadt:</i></small>
+			</font>
+			<font align=right><%= @accommodation_unitrail.city %></font>
+			<br>
+			</td>
+			<td  align="left">
+				<font size="4">
+			<small><i>PLZ:</i></small>
+			</font>
+			<font align=right><%= @accommodation_unitrail.postal_code %></font>
+			</td>
+		</tr>
+		<tr>
+			<td ><h3>Kontakt</h3></td>
+			<td ></td>
+		</tr>
+		<tr>
+			<td  align="left">
+				<font size="4">
+			<small><i>Email:</i></small>
+			</font>
+			<font align=right><%= @accommodation_unitrail.email %></font>
+			</td>
+			<td  align="left">
+				<font size="4">
+			<small><i>Internetadresse:</i></small>
+			</font>
+			<a href="<%= @accommodation_unitrail.internetadress %>" target="_blank"><%= @accommodation_unitrail.internetadress %></a>
+			</td>
+		</tr>
+		<tr></tr>
+		<tr>
+			<td ><h3>weitere Eigenschaften</h3></td>
+			<td ></td>
+		</tr>
+		<tr>
+			<td  align="left">			<textarea type="text" name="description"  cols="50" rows="10">	
+			
+			<%= @accommodation_unitrail.description %>
+			  </textarea></td>
+			<td  align="left">
+			<br>
+			Beschreibung
+			<br>
+			</td>
+		</tr>
+		<tr>
+			<td  align="left">
+			<font size="4">
+			<small><i>Anzahl Zimmer:</i></small>
+			</font>
+			<font align=right><%= @accommodation_unitrail.amount_of_rooms %></font>
+			
+			</td>
+			<td  align="left">
+			<font size="4">
+			<small><i>max. Gruppengröße:</i></small>
+			</font>
+			<font align=right><%= @accommodation_unitrail.max_group_size %></font>
+			
+			</td>
+		</tr>
+		<tr>
+			<td  align="left">
+			-------------------------------------------
+			<br>
+			</td>
+			<td  align="left">
+			<font size="4">
+			<small><i>Lebenshilfesterne</i></small>
+			</font>
+			<% for i in 1..@accommodation_unitrail.amount_of_lebenshilfe_stars.to_i %>
+			<%=  image_tag("lebenshilfestern.png", :size => "20x20")%>
+			<% end %>
+			</td>
+		</tr>
+		<tr>
+			
+			<td  align="left">
+			<font size="4">
+			<small><i>Entfernung zu Dresden:</i></small>
+			</font>
+			<font align=right><%= '%.2f' %@accommodation_unitrail.distance %> km</font>
+			</td>
+			<td  align="left">
+			<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=14&markers=#{@accommodation_unitrail.latitude}%2C#{@accommodation_unitrail.longitude}" %>
+			<br>
+			</td>
+		</tr>
+		<tr>
+			<td ><h3>Vehrkersanbindung</h3></td>
+			<td ></td>
+		</tr>
+		<tr>
+			<td  align="left">
+			<%= check_box_tag :public_transfer_weelchair ,0,  @accommodation_unitrail.public_transfer_weelchair %>
+			örtliche Busunternehmen (Rollstuhlbusse)
+			<br>
+			</td>
+			<td  align="left">
+			<%= check_box_tag :public_transfer,0,  @accommodation_unitrail.public_transfer %>
+			offentlich Verkehrsmittel
+			<br>
+			</td>
+		</tr>
+		<tr>
+			<td ><h3>In Einrichtung vorhanden</h3></td>
+			<td ></td>
+		</tr>
+		<tr>
+			<td  align="left">
+			<%= check_box_tag :internet ,0,  @accommodation_unitrail.internet %>
+			Internet
+			<br>
+			</td>
+			<td  align="left">
+			<%= check_box_tag :television ,0,  @accommodation_unitrail.television %>
+			Fernseher
+			<br>
+			</td>
+		</tr>
+		<tr>
+			<td  align="left">
+			<%= check_box_tag :beamer ,0,  @accommodation_unitrail.beamer %>
+			Beamer
+			<br>
+			</td>
+			<td  align="left">
+			<%= check_box_tag :grouproom ,0,  @accommodation_unitrail.grouproom %>
+			Gruppenraum
+			<br>
+			</td>
+		</tr>
+		<tr>
+			<td  align="left">
+			<%= check_box_tag :music_station,0,  @accommodation_unitrail.music_station %>
+			Musikanlage
+			<br>
+			</td>
+			<td  align="left">
+			<%= check_box_tag :bedding,0,  @accommodation_unitrail.bedding %>
+			Bettwäsche
+			<br>
+			</td>
+		</tr>
+		<tr>
+			<td  align="left">
+			<%= check_box_tag :dvd_player,0,  @accommodation_unitrail.dvd_player %>
+			DVD-Player
+			<br>
+			</td>
+			<td  align="left"></td>
+		</tr>
+		<tr>
+			<td ><h3>Freizeitbeschäftigungen</h3></td>
+			<td ></td>
+		</tr>
+		<tr>
+			<td  align="left">
+			<%= check_box_tag :playground,0,  @accommodation_unitrail.playground %>
+			Spielplatz
+			<br>
+			</td>
+			<td  align="left">
+			<%= check_box_tag :kicker ,0,  @accommodation_unitrail.kicker %>
+			Kicker
+			<br>
+			</td>
+		</tr>
+		<tr>
+			<td  align="left">
+			<%= check_box_tag :table_tennis,0,  @accommodation_unitrail.table_tennis %>
+			Tischtennis
+			<br>
+			</td>
+			<td  align="left">
+			<%= check_box_tag :bowling,0,  @accommodation_unitrail.bowling %>
+			Bowling
+			<br>
+			</td>
+		</tr>
+		<tr>
+			<td  align="left">
+			<%= check_box_tag :horse_riding ,0,  @accommodation_unitrail.horse_riding %>
+			Reitmöglichkeit
+			<br>
+			</td>
+			<td  align="left">
+			<%= check_box_tag :natatorium ,0,  @accommodation_unitrail.natatorium %>
+			Schwimmhalle
+			<br>
+			</td>
+		</tr>
+		<tr>
+			<td  align="left">
+			<%= check_box_tag :outdoor_swimming_batd ,0,  @accommodation_unitrail.outdoor_swimming_bath %>
+			Freibad / See
+			<br>
+			</td>
+			<td  align="left"></td>
+		</tr>
+		<tr>
+			<td ><h3>Behindertengerecht</h3></td>
+			<td ></td>
+		</tr>
+		<tr>
+			<td  align="left">
+			<%= check_box_tag :lifter ,0,  @accommodation_unitrail.lifter%>
+			Lifter
+			<br>
+			</td>
+			<td  align="left"></td>
+		</tr>
+		<tr>
+			<td  align="left">
+			<%= check_box_tag :coster_bed,0,  @accommodation_unitrail.coster_bed %>
+			Pflegebett
+			<br>
+			</td>
+			<td  align="left"></td>
+		</tr>
+		<tr>
+			<td  align="left">
+			<%= check_box_tag :wheelchair_accessible_bed,0,  @accommodation_unitrail.wheelchair_accessible_bed%>
+			rollstuhlgerechte Betten
+			<br>
+			</td>
+			<td  align="left"></td>
+		</tr>
+		<tr>
+			<td  align="left">
+			<%= check_box_tag :barrier_free ,0,  @accommodation_unitrail.barrier_free %>
+			Barrierefrei
+			<br>
+			</td>
+			<td  align="left"></td>
+		</tr>
+		<tr>
+			<td ><h3>Einrichtungen in der Nähe</h3></td>
+			<td ></td>
+		</tr>
+		<tr>
+			<td  align="left">
+			<%= check_box_tag :care_service ,0,  @accommodation_unitrail.care_service %>
+			Pflegedienst vor Ort
+			<br>
+			</td>
+			<td  align="left"></td>
+		</tr>
+		<tr>
+			<td  align="left">
+			<%= check_box_tag :shopping_facilities ,0,  @accommodation_unitrail.shopping_facilities %>
+			Einkaufmöglichkeiten (5km Radius)
+			<br>
+			</td>
+			<td  align="left"></td>
+		</tr>
+		<tr>
+			<td ><h3>Verpflegung</h3></td>
+			<td ></td>
+		</tr>
+		<tr>
+			<td  align="left">
+			<%= check_box_tag :full_board ,0,  @accommodation_unitrail.full_board %>
+			Vollverpflegung
+			<br>
+			</td>
+			<td  align="left"></td>
+		</tr>
+		<tr>
+			<td  align="left">
+			<%= check_box_tag :self_supply,0,  @accommodation_unitrail.self_supply%>
+			Selbstversorgung
+			<br>
+			</td>
+			<td  align="left"></td>
+		</tr>
+	</table>
+</div>
+</body>
+</html>

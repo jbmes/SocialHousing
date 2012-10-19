@@ -1,4 +1,16 @@
 Socialhousing::Application.routes.draw do
+  get "create_new_entry/new_entry"
+
+  get "search/find_entrys"
+  
+  post "search/get_results_for_searchparameters"
+  post "create_new_entry/create_entry_from_formdata"
+  post "create/create_entry"
+  
+  get "entry/show_entry"
+
+  resources :accommodation_unitrails
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

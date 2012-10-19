@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>City:</b>
+  <%= @accommodation_unitrail.city %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @accommodation_unitrail.description %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= @accommodation_unitrail.price %>
+</p>
+
+
+<%= link_to 'Edit', edit_accommodation_unitrail_path(@accommodation_unitrail) %> |
+<%= link_to 'Back', accommodation_unitrails_path %>
