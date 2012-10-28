@@ -47,10 +47,12 @@
     <td><%= accommodation_unitrail.name %></td>
 	<td><%= accommodation_unitrail.city %></td>
 	<td><a href="<%= accommodation_unitrail.internetadress %>" target="_blank"><%= accommodation_unitrail.internetadress %></a></td>
-	<td><%= '%.2f' %accommodation_unitrail.distance %>km</td>
+	<td><%= '%.2f' %accommodation_unitrail.distance unless accommodation_unitrail.distance.nil? %>km</td>
+	
 	<td><%= link_to "Details",:controller => "entry",:action => "show_entry",:id =>accommodation_unitrail.id %><br>
-   		<a href="" target="_blank">Bearbeiten</a><br>
-   		<a href="" target="_blank">Löschen</a>
+		<%= link_to "Löschen",:controller => "entry",:action => "delete_entry",:id =>accommodation_unitrail.id ,:tmp_query =>  @tmp_query %><br>
+   		
+   		<a href="" target="_blank">Bearbeiten</a>
    </td>
    
 	</tr>

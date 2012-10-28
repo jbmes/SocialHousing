@@ -7,7 +7,6 @@
 	<buildSpec>
 	</buildSpec>
 	<natures>
-		<nature>com.aptana.projects.webnature</nature>
 		<nature>com.aptana.ruby.core.rubynature</nature>
 	</natures>
 </projectDescription>

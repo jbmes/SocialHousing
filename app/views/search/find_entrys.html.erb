@@ -42,10 +42,13 @@
   	</tr>
 	<tr>
   		<tr>
-	  <td  align="left">			    
+	  <td  align="left">
+	  				    
 	    	<input type="text" name="max_group_size"> max. Gruppengröße <br>		  
 	  </td>
 	  <td  align="left">
+	<%= collection_select(:federal_state, :id, Config_Values.all, :name, :value ,{:include_blank => true }) %>
+			 Bundesland
 	  </td>
   	</tr>
 	<tr>
@@ -54,8 +57,45 @@
 	    <input type="text" name="amount_of_lebenshilfe_stars"> Anzahl Lebenshilfesterne <br>			  
 	  </td>
 	  <td  align="left">
+	  			<%= collection_select(:house_style, :id, Config_Values.where(:topic=>'house_style'), :name, :value,{:include_blank => true }) %>
+			Wohneinheitentyp
 	  </td>
   	</tr>
+  	<tr>
+	  <td  align="left">			    
+	    	<input type="checkbox" name="winter_suitable" value="true">
+			Winter geeignet		  
+	  </td>
+	  <td  align="left">
+
+	  </td>
+  	</tr>
+  		<tr>
+			<td ><h3>Zimmer</h3></td>
+			<td ></td>
+		</tr>
+		<tr>
+			<td  align="left">
+			<input type="checkbox" name="one_person_beth_rooms" value="true">
+			Einbettzimmer
+			<br>
+			</td>
+			<td  align="left">
+			<input type="checkbox" name="two_person_beth_rooms" value="true">
+			Zweibettzimmer
+			<br>
+			</td>
+		</tr>
+				<tr>
+			<td  align="left">
+			<input type="checkbox" name="more_person_beth_rooms" value="true">
+			Mehrbettzimmer
+			<br>
+			</td>
+			<td  align="left">
+			
+			</td>
+		</tr>
 	<tr>
 		<td>	
 		<h3>Vehrkersanbindung</h3>
@@ -117,6 +157,31 @@
 	  <td  align="left">
 	  </td>
   	</tr>
+  			</tr>
+				<tr>
+			<td  align="left">
+			<input type="checkbox" name="grill_area" value="true">
+			Grillplatz
+			<br>
+			</td>
+			<td  align="left">
+			<input type="checkbox" name="campfire_area" value="true">
+			Lagerfeuerstelle
+			<br>
+			</td>
+		</tr>
+					<tr>
+			<td  align="left">
+			<input type="checkbox" name="football_area" value="true">
+			Fussballplatz
+			<br>
+			</td>
+			<td  align="left">
+			<input type="checkbox" name="gym" value="true">
+			Turnhalle
+			<br>
+			</td>
+		</tr>
 	
 	
 	<tr>
@@ -155,7 +220,8 @@
 	    <input type="checkbox" name="outdoor_swimming_bath" value="true"> Freibad / See <br>			  
 	  </td>
 	  <td  align="left">
-  		
+  			<input type="checkbox" name="summer_coast" value="true">
+			Sommerrodelbahn
 	  </td>
   	</tr>
   	
@@ -172,6 +238,8 @@
 	    <input type="checkbox" name="lifter" value="true"> Lifter <br>			  
 	  </td>
 	  <td  align="left">
+	  	<input type="checkbox" name="weelchair_restricted" value="true">
+			weelchair_restricted
 	  </td>
   	</tr>
   	<tr>
@@ -231,7 +299,7 @@
   	</tr>
   	<tr>
 	  <td  align="left">			    
-	    <input type="checkbox" name="full_board" value="true"> Vollverpflegung <br>			  
+	    <input type="checkbox" name="full_board" value="true"> Vollpension <br>			  
 	  </td>
 	  <td  align="left">
 	  </td>
@@ -241,6 +309,7 @@
 	    <input type="checkbox" name="self_supply" value="true"> Selbstversorgung <br>			  
 	  </td>
 	  <td  align="left">
+	  	<input type="checkbox" name="half_board" value="true"> Halbpension<br>	
 	  </td>
   	</tr>
 
