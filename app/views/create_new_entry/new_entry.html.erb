@@ -20,15 +20,15 @@
 		</ul>
 	</div>
 <div class="wrap">
-<form action="/create_new_entry/create_entry_from_formdata" method="post">
-	<table >
-		<tr>
+	<%= form_for(@accommodation_unitrail, :url => { :action => "create_entry_from_formdata" }, :multipart => true) do |form|  %>
+     <table>
+     <tr>
 			<td><h3>Anschrift</h3> <div class="red">(Pflichtfelder*)</div></td>
 			<td></td>
 		</tr>
 		<tr>
 			<td  align="left">
-			<%= text_field_tag 'name',value = nil, :min => 0, :max => 10, :required => true%>
+			<%= form.text_field 'name',:value => nil, :required => true%>
 			Name Einrichtung*
 			<br>
 			</td>
@@ -36,41 +36,50 @@
 		</tr>
 		<tr>
 			<td  align="left">
-			<%= text_field_tag 'contact_person',value = nil, :min => 0, :max => 10, :required => true%>
+			<%= form.text_field :'contact_person',:value => nil, :required => true%>
 			
 			Ansprechpartner*
 			<br>
 			</td>
 			<td  align="left">
-				<%= phone_field_tag 'tel_contact_person',value = nil, :min => 0, :max => 10, :required => true%>
+				<%= form.phone_field :'tel_contact_person',:value => nil, :required => true%>
 			
 			Tel. Ansprechpartner*
-			<br>
 			</td>
 		</tr>
 		<tr>
 			<td  align="left">
-				<%= text_field_tag 'street',value = nil, :min => 0, :max => 10, :required => true%>
+			<%= form.text_field :'street',:value => nil, :required => true%>
 			
 			Straße*
-			<br>
 			</td>
 			<td  align="left">
-			<%= number_field_tag 'house_number',value = nil, :min => 0, :max => 10, :required => true%>
+			<%= form.text_field :'house_number',:value => nil, :required => true%>
 			Hausnr.*
 			<br>
 			</td>
 		</tr>
 		<tr>
-			<td  align="left">
-			<%= text_field_tag 'city',value = nil, :min => 0, :max => 10, :required => true%>
+			<td  align="left">			
+			<%= form.text_field :'city',:value => nil, :required => true%>
 			Stadt*
 			<br>
 			</td>
 			<td  align="left">
-			<%= number_field_tag 'postal_code',value = nil, :min => 0, :max => 10, :required => true%>
+			<%= form.number_field :'postal_code',:value => nil, :required => true%>
 			Postleitzahl*
 			<br>
+			</td>
+		</tr>
+				<tr>
+			<td  align="left">
+			<%= collection_select(:federal_state, :id, Config_Values.where(:topic=>'federal_state'), :name, :value) %>
+			
+			Bundesland*
+			</td>
+			<td  align="left">
+			<%= collection_select(:house_style, :id, Config_Values.where(:topic=>'house_style'), :name, :value) %>
+			Wohneinheitentyp
 			</td>
 		</tr>
 		<tr>
@@ -79,13 +88,15 @@
 		</tr>
 		<tr>
 			<td  align="left">
-			<input type="text" name="email">
+				<%= form.email_field 'email',:value => nil %>
+			
 			Email
 			<br>
 			</td>
 			<td  align="left">
-			<input type="text" name="internetadress">
-			Internetadresse
+				<%= form.url_field 'internetadress',:value => nil %>
+			
+			Internetadresse (http://www.beispiel.de)
 			<br>
 			</td>
 		</tr>
@@ -94,13 +105,21 @@
 			<td ><h3>weitere Eigenschaften</h3></td>
 			<td ></td>
 		</tr>
-		
 		<tr>
-			<td  align="left">			<textarea type="text" name="description"  cols="50" rows="10">  </textarea></td>
 			<td  align="left">
-			<br>
-			Beschreibung
-			<br>
+				<p align="left">Beschreibung</p>
+			</td>		
+			<td  align="left">
+			<p align="left"> Foto</p>
+			</td>
+		</tr>
+		<tr>
+			<td  align="left">
+				
+			<%= form.text_area 'description',:value => nil ,:cols => 20, :rows => 10%>	
+			</td>		
+			<td  align="left">
+			<%= form.file_field :foto %>
 			</td>
 		</tr>
 		<tr>
@@ -117,12 +136,13 @@
 		</tr>
 		<tr>
 			<td  align="left">
-			<%= file_field_tag 'foto' %>
-			Foto
-			<br>
+			
+			<input type="checkbox" name="winter_suitable" value="true">
+			Winter geeignet
 			</td>
 			<td  align="left">
-			<input type="text" name="amount_of_lebenshilfe_stars">
+				<%= form.number_field 'amount_of_lebenshilfe_stars',:value => 1 ,:in => 1...4 %>	
+			
 			Lebenshilfesterne
 			<br>
 			</td>
@@ -137,6 +157,32 @@
 			<input type="text" name="longitude">
 			Longitude
 			<br>
+			</td>
+		</tr>
+		<tr>
+			<td ><h3>Zimmer</h3></td>
+			<td ></td>
+		</tr>
+		<tr>
+			<td  align="left">
+			<input type="checkbox" name="one_person_beth_rooms" value="true">
+			Einbettzimmer
+			<br>
+			</td>
+			<td  align="left">
+			<input type="checkbox" name="two_person_beth_rooms" value="true">
+			Zweibettzimmer
+			<br>
+			</td>
+		</tr>
+				<tr>
+			<td  align="left">
+			<input type="checkbox" name="more_person_beth_rooms" value="true">
+			Mehrbettzimmer
+			<br>
+			</td>
+			<td  align="left">
+			
 			</td>
 		</tr>
 		<tr>
@@ -219,6 +265,30 @@
 			<br>
 			</td>
 		</tr>
+				<tr>
+			<td  align="left">
+			<input type="checkbox" name="grill_area" value="true">
+			Grillplatz
+			<br>
+			</td>
+			<td  align="left">
+			<input type="checkbox" name="campfire_area" value="true">
+			Lagerfeuerstelle
+			<br>
+			</td>
+		</tr>
+					<tr>
+			<td  align="left">
+			<input type="checkbox" name="football_area" value="true">
+			Fussballplatz
+			<br>
+			</td>
+			<td  align="left">
+			<input type="checkbox" name="gym" value="true">
+			Turnhalle
+			<br>
+			</td>
+		</tr>
 		<tr>
 			<td  align="left">
 			<input type="checkbox" name="table_tennis" value="true">
@@ -245,11 +315,14 @@
 		</tr>
 		<tr>
 			<td  align="left">
-			<input type="checkbox" name="outdoor_swimming_batd" value="true">
+			<input type="checkbox" name="outdoor_swimming_bath" value="true">
 			Freibad / See
 			<br>
 			</td>
-			<td  align="left"></td>
+			<td  align="left">
+			<input type="checkbox" name="summer_coast" value="true">
+			Sommerrodelbahn
+			</td>
 		</tr>
 		<tr>
 			<td ><h3>Behindertengerecht</h3></td>
@@ -261,7 +334,8 @@
 			Lifter
 			<br>
 			</td>
-			<td  align="left"></td>
+			<td  align="left"><input type="checkbox" name="weelchair_restricted" value="true">
+			weelchair_restricted</td>
 		</tr>
 		<tr>
 			<td  align="left">
@@ -285,8 +359,9 @@
 			Barrierefrei
 			<br>
 			</td>
-			<td  align="left"></td>
+			<td ></td>
 		</tr>
+		
 		<tr>
 			<td ><h3>Einrichtungen in der Nähe</h3></td>
 			<td ></td>
@@ -314,7 +389,7 @@
 		<tr>
 			<td  align="left">
 			<input type="checkbox" name="full_board" value="true">
-			Vollverpflegung
+			Vollpension
 			<br>
 			</td>
 			<td  align="left"></td>
@@ -325,16 +400,30 @@
 			Selbstversorgung
 			<br>
 			</td>
-			<td  align="left"></td>
+			<td  align="left">
+			<input type="checkbox" name="half_board" value="true">
+			Halbpension
+			<br>
+			</td>
+			
 		</tr>
+		 <%= form.fields_for :links do |builder| %>
+	<tr>
+		
+		 <%= render :partial => "/shared/link_field",:locals => { :form => builder} %> 
+ 		
+ 		
+ 		</tr>
+ 		<% end %> 
 		<tr>
 		
-		<td> <%= image_submit_tag("check32.png")%></td>
+		<td> <%= form.submit "Upload"%></td>
 	</tr>
 
 	</table>
-  
-</form>
+    <% end %>
+
+
 </div>
 </body>
 </html>

@@ -29,6 +29,8 @@ end
 gem "geocoder"
 gem "paperclip", "~>3.0"
 gem 'jquery-rails'
+gem 'dragonfly', '~>0.9.12'
+gem 'rack-cache', :require => 'rack/cache'
 
 
 # To use ActiveModel has_secure_password

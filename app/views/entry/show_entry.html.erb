@@ -26,71 +26,65 @@
 		</tr>
 		<tr>
 			<td  align="left">
-			<font size="4">
-			<small><i>Name:</i></small>
-			</font>
+			<p class="entry_sections">Name:</p>
 			<font align=right><%= @accommodation_unitrail.name %></font>
 			</td>
 			<td  align="left"></td>
 		</tr>
 		<tr>
 			<td  align="left">
-			<font size="4">
-			<small><i>Ansprechpartner:</i></small>
-			</font>
+			<p class="entry_sections">Ansprechpartner:</p>
 			<font align=right><%= @accommodation_unitrail.contact_person %></font>
 			</td>
 			<td  align="left">
-			<font size="4">
-			<small><i>Tel. Ansprechpartner</i></small>
-			</font>
+			<p class="entry_sections">Tel. Ansprechpartner</p>
 			<font align=right><%= @accommodation_unitrail.tel_contact_person %></font>
 			</td>
 		</tr>
 		<tr>
 			<td  align="left">
-			<font size="4">
-			<small><i>Straße:</i></small>
-			</font>
+			<p class="entry_sections">Straße:</p>
 			<font align=right><%= @accommodation_unitrail.street %></font>
 			</td>
 			<td  align="left">
-				<font size="4">
-			<small><i>HauseNr:</i></small>
-			</font>
+				<p class="entry_sections">HauseNr:</p>
 			<font align=right><%= @accommodation_unitrail.house_number %></font>
 			</td>
 		</tr>
 		<tr>
 			<td  align="left">
-			<font size="4">
-			<small><i>Stadt:</i></small>
-			</font>
+			<p class="entry_sections">Stadt:</p>
 			<font align=right><%= @accommodation_unitrail.city %></font>
 			<br>
 			</td>
 			<td  align="left">
-				<font size="4">
-			<small><i>PLZ:</i></small>
-			</font>
+			<p class="entry_sections">PLZ:</p>
 			<font align=right><%= @accommodation_unitrail.postal_code %></font>
 			</td>
 		</tr>
+		<tr>
+			<td  align="left">
+				<p class="entry_sections">Bundesland:</p>
+				<font align=right><%= @accommodation_unitrail.federal_state %></font>
+			
+			
+			</td>
+			<td  align="left">
+		
+			</td>
+		</tr>
+		
 		<tr>
 			<td ><h3>Kontakt</h3></td>
 			<td ></td>
 		</tr>
 		<tr>
 			<td  align="left">
-				<font size="4">
-			<small><i>Email:</i></small>
-			</font>
+			<p class="entry_sections" > Email:</p>
 			<font align=right><%= @accommodation_unitrail.email %></font>
 			</td>
 			<td  align="left">
-				<font size="4">
-			<small><i>Internetadresse:</i></small>
-			</font>
+			<p class="entry_sections" > Internetadresse:</p>
 			<a href="<%= @accommodation_unitrail.internetadress %>" target="_blank"><%= @accommodation_unitrail.internetadress %></a>
 			</td>
 		</tr>
@@ -99,47 +93,75 @@
 			<td ><h3>weitere Eigenschaften</h3></td>
 			<td ></td>
 		</tr>
-		<tr>
-			<td  align="left">			<textarea type="text" name="description"  cols="50" rows="10">	
-			
-			<%= @accommodation_unitrail.description %>
-			  </textarea></td>
+			<tr>
 			<td  align="left">
-			<br>
-			Beschreibung
-			<br>
-			</td>
-		</tr>
-		<tr>
-			<td  align="left">
-			<font size="4">
-			<small><i>Anzahl Zimmer:</i></small>
-			</font>
+			<p class="entry_sections">Anzahl Zimmer:</p>
 			<font align=right><%= @accommodation_unitrail.amount_of_rooms %></font>
 			
 			</td>
 			<td  align="left">
-			<font size="4">
-			<small><i>max. Gruppengröße:</i></small>
-			</font>
+			<p class="entry_sections"> max. Gruppengröße:</p>
 			<font align=right><%= @accommodation_unitrail.max_group_size %></font>
 			
 			</td>
 		</tr>
 		<tr>
 			<td  align="left">
-			-------------------------------------------
+			<%= check_box_tag :winter_suitable,0,  @accommodation_unitrail.winter_suitable %>
+			Winter geeignet
 			<br>
 			</td>
 			<td  align="left">
-			<font size="4">
-			<small><i>Lebenshilfesterne</i></small>
-			</font>
+			<p class="entry_sections"> Lebenshilfesterne:</p>
 			<% for i in 1..@accommodation_unitrail.amount_of_lebenshilfe_stars.to_i %>
 			<%=  image_tag("lebenshilfestern.png", :size => "20x20")%>
 			<% end %>
 			</td>
 		</tr>
+		<tr>
+			<td ><h3>Zimmer</h3></td>
+			<td ></td>
+		</tr>
+		<tr>
+			<td  align="left">
+			<%= check_box_tag :public_transfer,0,  @accommodation_unitrail.one_person_beth_rooms %>
+			Einbettzimmer
+			<br>
+			</td>
+			<td  align="left">
+			<%= check_box_tag :public_transfer,0,  @accommodation_unitrail.two_person_beth_rooms %>
+			Zweibettzimmer
+			<br>
+			</td>
+		</tr>
+				<tr>
+			<td  align="left">
+			<%= check_box_tag :public_transfer,0,  @accommodation_unitrail.more_person_beth_rooms %>
+			Mehrbettzimmer
+			<br>
+			</td>
+			<td  align="left">
+			
+			</td>
+		</tr>
+		<tr>
+			<td  align="left">
+				<p class="entry_sections">Beschreibung:</p>
+			</td>		
+			<td  align="left">
+				<p class="entry_sections"> Foto:</p>
+			</td>
+		</tr>
+		<tr>
+			<td  VALIGN="top">	
+			<textarea  rows="10" cols="20" readonly="readonly" disabled="disabled"><%= @accommodation_unitrail.description %></textarea>
+			</td>
+			<td  align="left">
+				<%= image_tag url_for(:action => 'code_image', :id => @accommodation_unitrail.id, :size=>"50") %>
+			
+			</td>
+		</tr>
+	
 		<tr>
 			
 			<td  align="left">
@@ -233,6 +255,33 @@
 			<br>
 			</td>
 		</tr>
+				<tr>
+			<td  align="left">
+			<%= check_box_tag :public_transfer,0,  @accommodation_unitrail.grill_area %>
+			Grillplatz
+			<br>
+			</td>
+			<td  align="left">
+				
+			<%= check_box_tag :public_transfer,0,  @accommodation_unitrail.campfire_area %>
+			Lagerfeuerstelle
+			<br>
+			</td>
+		</tr>
+					<tr>
+			<td  align="left">
+				
+			<%= check_box_tag :public_transfer,0,  @accommodation_unitrail.football_area %>
+			Fussballplatz
+			<br>
+			</td>
+			<td  align="left">
+				
+			<%= check_box_tag :public_transfer,0,  @accommodation_unitrail.gym %>
+			Turnhalle
+			<br>
+			</td>
+		</tr>
 		<tr>
 			<td  align="left">
 			<%= check_box_tag :table_tennis,0,  @accommodation_unitrail.table_tennis %>
@@ -263,7 +312,10 @@
 			Freibad / See
 			<br>
 			</td>
-			<td  align="left"></td>
+			<td>
+			<%= check_box_tag :outdoor_swimming_batd ,0,  @accommodation_unitrail.summer_coast %>
+			Sommerrodelbahn
+			</td>
 		</tr>
 		<tr>
 			<td ><h3>Behindertengerecht</h3></td>
@@ -275,7 +327,10 @@
 			Lifter
 			<br>
 			</td>
-			<td  align="left"></td>
+			<td  align="left">
+				<%= check_box_tag :lifter ,0,  @accommodation_unitrail.weelchair_restricted %>
+				weelchair_restricted
+			</td>
 		</tr>
 		<tr>
 			<td  align="left">
@@ -291,7 +346,7 @@
 			rollstuhlgerechte Betten
 			<br>
 			</td>
-			<td  align="left"></td>
+			<td ></td>
 		</tr>
 		<tr>
 			<td  align="left">
@@ -328,7 +383,7 @@
 		<tr>
 			<td  align="left">
 			<%= check_box_tag :full_board ,0,  @accommodation_unitrail.full_board %>
-			Vollverpflegung
+			Vollpension
 			<br>
 			</td>
 			<td  align="left"></td>
@@ -339,8 +394,13 @@
 			Selbstversorgung
 			<br>
 			</td>
-			<td  align="left"></td>
+			<td  align="left">
+			<%= check_box_tag :half_board ,0,  @accommodation_unitrail.half_board %>
+			Halbpension
+			<br>
+			</td>
 		</tr>
+		
 	</table>
 </div>
 </body>

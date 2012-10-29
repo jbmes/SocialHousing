@@ -4,10 +4,13 @@ Socialhousing::Application.routes.draw do
   get "search/find_entrys"
   
   post "search/get_results_for_searchparameters"
+  get "search/get_results_for_searchparameters"
   post "create_new_entry/create_entry_from_formdata"
   post "create/create_entry"
+  get "entry/code_image"
   
   get "entry/show_entry"
+  get "entry/delete_entry"
 
   resources :accommodation_unitrails
 
