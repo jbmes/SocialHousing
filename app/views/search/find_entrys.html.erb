@@ -57,7 +57,7 @@
 	    <input type="text" name="amount_of_lebenshilfe_stars"> Anzahl Lebenshilfesterne <br>			  
 	  </td>
 	  <td  align="left">
-	  			<%= collection_select(:house_style, :id, Config_Values.where(:topic=>'house_style'), :name, :value,{:include_blank => true }) %>
+	  			<%= collection_select(:kind_of_house, :id, Config_Values.where(:topic=>'kind_of_house'), :name, :value,{:include_blank => true }) %>
 			Wohneinheitentyp
 	  </td>
   	</tr>

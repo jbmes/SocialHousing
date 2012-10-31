@@ -14,30 +14,39 @@ class CreateNewEntryController < ApplicationController
   
   def create_entry_from_formdata
     
-    
-    @accommodation_unitrail.name = params[:upload][:name]
-    @accommodation_unitrail.contact_person = params[:upload][:contact_person]
-    @accommodation_unitrail.tel_contact_person = params[:upload][:tel_contact_person]
-    @accommodation_unitrail.city = params[:upload][:city]
-    @accommodation_unitrail.street = params[:upload][:street]
-    @accommodation_unitrail.house_number = params[:upload][:house_number]
-    @accommodation_unitrail.postal_code = params[:upload][:postal_code]
-    @accommodation_unitrail.email = params[:upload][:email]
-    @accommodation_unitrail.internetadress = params[:upload][:internetadress]
+    @accommodation_unitrail = AccommodationUnitrail.new
+    @accommodation_unitrail.name = params[:accommodation_unitrail][:name]
+    @accommodation_unitrail.contact_person = params[:accommodation_unitrail][:contact_person]
+    @accommodation_unitrail.tel_contact_person = params[:accommodation_unitrail][:tel_contact_person]
+    @accommodation_unitrail.city = params[:accommodation_unitrail][:city]
+    @accommodation_unitrail.street = params[:accommodation_unitrail][:street]
+    @accommodation_unitrail.house_number = params[:accommodation_unitrail][:house_number]
+    @accommodation_unitrail.postal_code = params[:accommodation_unitrail][:postal_code]
+    @accommodation_unitrail.email = params[:accommodation_unitrail][:email]
+    @accommodation_unitrail.internetadress = params[:accommodation_unitrail][:internetadress]
    
-    @accommodation_unitrail.description = params[:upload][:description]
+    @accommodation_unitrail.description = params[:accommodation_unitrail][:description]
+    @accommodation_unitrail.amount_of_lebenshilfe_stars = params[:accommodation_unitrail][:amount_of_lebenshilfe_stars]
      
      
-    adress = params[:upload][:city] + " " + params[:upload][:street] + " " + params[:upload][:house_number].to_s + " " + params[:upload][:postal_code].to_s
+    adress = params[:accommodation_unitrail][:city].to_s + " " + params[:accommodation_unitrail][:street].to_s + " " + params[:accommodation_unitrail][:house_number].to_s + " " + params[:accommodation_unitrail][:postal_code].to_s
      
      
      
      geo_vals = Geocoder.coordinates(adress.to_s)
-     @accommodation_unitrail.latitude = geo_vals[0]
-     @accommodation_unitrail.longitude = geo_vals[1]
+     unless geo_vals.nil?
+       @accommodation_unitrail.latitude = geo_vals[0]
+       @accommodation_unitrail.longitude = geo_vals[1]
+     end
+     
      @accommodation_unitrail.winter_suitable = params[:winter_suitable]
-     @accommodation_unitrail.federal_state =  params[:federal_state][:id]
-     @accommodation_unitrail.kinf_of_house =  params[:kinf_of_house]
+     unless params[:federal_state].nil?
+        @accommodation_unitrail.federal_state =  params[:federal_state][:id]
+     end
+
+  unless params[:kind_of_house].nil?
+     @accommodation_unitrail.kind_of_house =  params[:kind_of_house][:id]
+   end
      
      @accommodation_unitrail.grill_area =  params[:grill_area]
       @accommodation_unitrail.campfire_area =  params[:campfire_area]
@@ -53,8 +62,13 @@ class CreateNewEntryController < ApplicationController
      @accommodation_unitrail.more_person_beth_rooms =  params[:more_person_beth_rooms]
      
      
-     
-     @accommodation_unitrail.distance = calculate_distance(geo_vals[0], geo_vals[1], @dresden_latitude.to_f, @dresden_longitude.to_f)
+     unless geo_vals.nil?
+      @accommodation_unitrail.distance = calculate_distance(geo_vals[0], geo_vals[1], @dresden_latitude.to_f, @dresden_longitude.to_f)
+      
+      else
+         @accommodation_unitrail.distance = -1
+     end
+      
      @accommodation_unitrail.internet = params[:internet]
      @accommodation_unitrail.dvd_player = params[:dvd_player]
      @accommodation_unitrail.music_station = params[:music_station]
@@ -62,7 +76,7 @@ class CreateNewEntryController < ApplicationController
      @accommodation_unitrail.beamer = params[:beamer]
      @accommodation_unitrail.grouproom = params[:grouproom]
      @accommodation_unitrail.bedding = params[:bedding]
-     @accommodation_unitrail.amount_of_lebenshilfe_stars = params[:amount_of_lebenshilfe_stars]
+     
      @accommodation_unitrail.amount_of_rooms = params[:amount_of_rooms]
      
      @accommodation_unitrail.horse_riding = params[:horse_riding]
@@ -99,10 +113,11 @@ class CreateNewEntryController < ApplicationController
     @accommodation_unitrail.save
     id = @accommodation_unitrail.id
     
-    unless params[:upload][:foto].nil?
+    unless params[:accommodation_unitrail][:foto].nil?
       @photo = Photo.new
        @photo.description = "testing"
-       file_param = params[:upload][:foto]
+       file_param = params[:accommodation_unitrail][:foto]
+       @photo.category = "fotos"
        @photo.content_type = file_param.content_type
        @photo.filename = file_param.original_filename
        @photo.binary_data = file_param.read
@@ -110,6 +125,17 @@ class CreateNewEntryController < ApplicationController
        @photo.save
      end
     
+    unless params[:accommodation_unitrail][:bedplan].nil?
+      @photo = Photo.new
+       @photo.description = "testing"
+       file_param = params[:accommodation_unitrail][:bedplan]
+       @photo.category = "bedplan"
+       @photo.content_type = file_param.content_type
+       @photo.filename = file_param.original_filename
+       @photo.binary_data = file_param.read
+       @photo.accommodation_id = id
+       @photo.save
+     end
     
     
     

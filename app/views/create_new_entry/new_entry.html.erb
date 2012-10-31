@@ -77,10 +77,10 @@
 			<td  align="left">
 			<%= collection_select(:federal_state, :id, Config_Values.where(:topic=>'federal_state'), :name, :value) %>
 			
-			Bundesland*
+			Bundesland
 			</td>
 			<td  align="left">
-			<%= collection_select(:house_style, :id, Config_Values.where(:topic=>'house_style'), :name, :value) %>
+			<%= collection_select(:kind_of_house, :id, Config_Values.where(:topic=>'kind_of_house'), :name, :value) %>
 			Wohneinheitentyp
 			</td>
 		</tr>
@@ -112,13 +112,28 @@
 				<p align="left">Beschreibung</p>
 			</td>		
 			<td  align="left">
-			<p align="left"> Foto</p>
 			</td>
 		</tr>
 		<tr>
 			<td  align="left">
 				
 			<%= form.text_area 'description',:value => nil ,:cols => 20, :rows => 10%>	
+			</td>		
+			<td  align="left">
+			</td>
+		</tr>
+				<tr>
+			<td  align="left">
+				<h3 align="left">Bettenplan</h3>
+			</td>		
+			<td  align="left">
+			<h3 align="left"> Foto</h3>
+			</td>
+		</tr>
+		<tr>
+			<td  align="left">
+				
+			<%= form.file_field :bedplan%>
 			</td>		
 			<td  align="left">
 			<%= form.file_field :foto %>
@@ -411,14 +426,15 @@
 		</tr>
 		 <%= form.fields_for :links do |builder| %>
 	<tr>
-		
+		<div class="fields">
 		 <%= render :partial => "/shared/link_field",:locals => { :form => builder} %> 
  		
- 		
+ 		 
  		</tr>
  		<% end %>
  		
- 		<%= link_to_function "add", "add_fields(this, form, #{:links})" %>
+ 		<%= link_to_function "add", "add_fields(this, #{form}, #{:links})" %>
+ 		</div>
 		<tr>
 		
 		<td> <%= form.submit "Upload"%></td>

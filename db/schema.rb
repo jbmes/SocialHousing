@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(:version => 20121025174225) do
     t.string   "tel_contact_person"
     t.string   "city"
     t.string   "street"
-    t.string   "house_style"
+    t.string   "kind_of_house"
     t.string   "house_number"
     t.string   "postal_code"
     t.integer  "amount_of_lebenshilfe_stars"
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(:version => 20121025174225) do
   create_table "photos", :force => true do |t|
     t.string  "description"
     t.string  "content_type"
+    t.string  "category"
     t.string  "filename"
     t.binary  "binary_data"
     t.integer "accommodation_id"

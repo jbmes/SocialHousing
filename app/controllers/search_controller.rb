@@ -38,11 +38,11 @@ class SearchController < ApplicationController
       query_strg =  "#{query_strg}#{"federal_state"} == '#{params[:federal_state][:id]}'"
     end
     
-    unless params[:house_style][:id] == ""
+    unless params[:kind_of_house][:id] == ""
        if query_strg != ""
           query_strg = "#{query_strg} AND "
         end
-      query_strg =  "#{query_strg}#{"house_style"} == '#{params[:house_style][:id]}'"
+      query_strg =  "#{query_strg}#{"kind_of_house"} == '#{params[:kind_of_house][:id]}'"
     end
 
     
@@ -55,7 +55,7 @@ class SearchController < ApplicationController
      params.delete :federal_state
      params.delete :action
      params.delete :controller
-     params.delete :house_style
+     params.delete :kind_of_house
     
     query_strg_2 = params.map{|k, v| "#{k} = 't'"}.join(' AND ')
     

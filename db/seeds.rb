@@ -110,31 +110,31 @@ AccommodationUnitrail.create([{name: 'Villakunterbunt',
              
                      
                      Config_Values.create([{name: 'Hotel',
-                               topic: 'house_style',
+                               topic: 'kind_of_house',
                                                      value: 'Hotel'}])
                      
                      Config_Values.create([{name: 'Jugendhaus',
-                               topic: 'house_style',
+                               topic: 'kind_of_house',
                                                      value: 'Jugendhaus'}])
                      
                      Config_Values.create([{name: 'Ferienwohnung',
-                               topic: 'house_style',
+                               topic: 'kind_of_house',
                                                      value: 'Ferienwohnung'}])
                      
                      Config_Values.create([{name: 'Gruppenhaus',
-                               topic: 'house_style',
+                               topic: 'kind_of_house',
                                                      value: 'Gruppenhaus'}])
                                                      Config_Values.create([{name: 'Bauernhof',
-                               topic: 'house_style',
+                               topic: 'kind_of_house',
                                                      value: 'Bauernhof'}])
                                                      Config_Values.create([{name: 'Reiterhof',
-                               topic: 'house_style',
+                               topic: 'kind_of_house',
                                                      value: 'Reiterhof'}])
                                                      Config_Values.create([{name: 'Zeltplatz',
-                               topic: 'house_style',
+                               topic: 'kind_of_house',
                                                      value: 'Zeltplatz'}])
                                                      Config_Values.create([{name: 'Pension',
-                               topic: 'house_style',
+                               topic: 'kind_of_house',
                                                      value: 'Pension'}])
                      
                      
