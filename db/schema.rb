@@ -53,9 +53,12 @@ ActiveRecord::Schema.define(:version => 20121025174225) do
     t.boolean  "lifter"
     t.boolean  "weelchair_restricted"
     t.boolean  "public_transfer"
+    t.string   "public_transfer_note"
     t.boolean  "public_transfer_weelchair"
+    t.string   "public_transfer_weelchair_note"
     t.boolean  "shopping_facilities"
     t.boolean  "care_service"
+    t.string   "care_service_note"
     t.boolean  "self_supply"
     t.boolean  "full_board"
     t.boolean  "half_board"
@@ -68,8 +71,29 @@ ActiveRecord::Schema.define(:version => 20121025174225) do
     t.boolean  "one_person_beth_rooms"
     t.boolean  "two_person_beth_rooms"
     t.boolean  "more_person_beth_rooms"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.boolean  "minigolf"
+    t.boolean  "sauna"
+    t.boolean  "fitness"
+    t.boolean  "bicycle"
+    t.boolean  "archery"
+    t.boolean  "climbing"
+    t.boolean  "wander"
+    t.boolean  "paddle"
+    t.boolean  "ski"
+    t.boolean  "snowshoerunning"
+    t.boolean  "animals"
+    t.boolean  "drumcircle"
+    t.boolean  "music"
+    t.boolean  "senseparcur"
+    t.boolean  "nature_trail"
+    t.boolean  "kneip"
+    t.boolean  "tinker"
+    t.boolean  "pottery"
+    t.boolean  "frisk"
+    t.boolean  "glassblowing"
+    t.boolean  "paint"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   create_table "config_values", :force => true do |t|

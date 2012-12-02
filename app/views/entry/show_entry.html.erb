@@ -14,11 +14,13 @@
 		<ul id="menu">
 			<li><a href="/search/find_entrys">Suche</a></li>
 			<li><a href="/create_new_entry/new_entry">Anlegen</a></li>
-			<li><a href="#">contact</a></li>
+			
+			<%= link_to "Bearbeiten",:controller => "entry",:action => "edit_entry",:id =>@accommodation_unitrail.id %>
 		</ul>
 	</div>
 
 <div class="wrap">
+	
 	<table >
 		<tr>
 			<td ><h3>Anschrift</h3></td>
@@ -108,9 +110,6 @@
 		</tr>
 		<tr>
 			<td  align="left">
-			<%= check_box_tag :winter_suitable,0,  @accommodation_unitrail.winter_suitable %>
-			Winter geeignet
-			<br>
 			</td>
 			<td  align="left">
 			<p class="entry_sections"> Lebenshilfesterne:</p>
@@ -120,301 +119,45 @@
 			</td>
 		</tr>
 		<tr>
-			<td ><h3>Zimmer</h3></td>
-			<td ></td>
-		</tr>
-		<tr>
-			<td  align="left">
-			<%= check_box_tag :public_transfer,0,  @accommodation_unitrail.one_person_beth_rooms %>
-			Einbettzimmer
-			<br>
-			</td>
-			<td  align="left">
-			<%= check_box_tag :public_transfer,0,  @accommodation_unitrail.two_person_beth_rooms %>
-			Zweibettzimmer
-			<br>
-			</td>
-		</tr>
-				<tr>
-			<td  align="left">
-			<%= check_box_tag :public_transfer,0,  @accommodation_unitrail.more_person_beth_rooms %>
-			Mehrbettzimmer
-			<br>
-			</td>
-			<td  align="left">
-			
-			</td>
-		</tr>
-		<tr>
 			<td  align="left">
 				<p class="entry_sections">Beschreibung:</p>
 			</td>		
 			<td  align="left">
 				<p class="entry_sections"> Entfernung u. Maps</p>
-			</td>
+				</td>
 		</tr>
 		<tr>
 			<td  VALIGN="top">	
 			<textarea  rows="10" cols="20" readonly="readonly" disabled="disabled"><%= @accommodation_unitrail.description %></textarea>
-			</td>
+			</td>	
 			<td  align="left">
+			
+				<%= image_tag "http://maps.google.com/maps/api/staticmap?zoom=14&size=300x300&maptype=roadmap&markers=#{@accommodation_unitrail.latitude},#{@accommodation_unitrail.longitude}&sensor=false" %>
+			</td>
+		</tr>
+		<tr>
+			<td  align="left">
+				<p class="entry_sections">Bettenplan</p>
+			</td>		
+			<td  align="left">
+				<p class="entry_sections"> Bild Einrichtung</p>
+				</td>
+		</tr>
+		<tr>
+			<td>
+				
+				<%= image_tag url_for(:controller => "entry", :action => "code_image", :id => @accommodation_unitrail.id,:category => "bedplan"),:size => "260x180" %>
+			</td>
+						<td>
+				
+				<%= image_tag url_for(:controller => "entry", :action => "code_image", :id => @accommodation_unitrail.id,:category => "foto"),:size => "260x180" %>
+			</td>
+		</tr>
 
-				<font size="4">
-			<small><i>Entfernung zu Dresden:</i></small>
-			</font>
-			<font align=right><%= '%.2f' %@accommodation_unitrail.distance %> km</font>
-			<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=14&markers=#{@accommodation_unitrail.latitude}%2C#{@accommodation_unitrail.longitude}" %>
+			<%= form_for(@accommodation_unitrail, :url => { :controller => controller.controller_name , :action => "get_data_from_form" }, :multipart => true) do |form|  %>
 			
-			</td>
-		</tr>
-	
-			<tr>
-			
-			
-			<td>
-			<h3>Bettenplan</h3>
-			</td>
-			<td  align="left">
-				<h3>Foto</h3>
-			</td>
-		</tr>
-		<tr>
-			
-			
-			<td >
-				<%= link_to{image_tag url_for(:action => 'code_image', :id => @accommodation_unitrail.id,:category => "bedplan"), :size => "200x200"}  %>
-			</td>
-			<td  >
-				<%= image_tag url_for(:action => 'code_image', :id => @accommodation_unitrail.id,:category => "fotos"), :size => "200x200" %>
-			
-			</td>
-		</tr>
-		<tr>
-			<td ><h3>Vehrkersanbindung</h3></td>
-			<td ></td>
-		</tr>
-		<tr>
-			<td  align="left">
-			<%= check_box_tag :public_transfer_weelchair ,0,  @accommodation_unitrail.public_transfer_weelchair %>
-			örtliche Busunternehmen (Rollstuhlbusse)
-			<br>
-			</td>
-			<td  align="left">
-			<%= check_box_tag :public_transfer,0,  @accommodation_unitrail.public_transfer %>
-			offentlich Verkehrsmittel
-			<br>
-			</td>
-		</tr>
-		<tr>
-			<td ><h3>In Einrichtung vorhanden</h3></td>
-			<td ></td>
-		</tr>
-		<tr>
-			<td  align="left">
-			<%= check_box_tag :internet ,0,  @accommodation_unitrail.internet %>
-			Internet
-			<br>
-			</td>
-			<td  align="left">
-			<%= check_box_tag :television ,0,  @accommodation_unitrail.television %>
-			Fernseher
-			<br>
-			</td>
-		</tr>
-		<tr>
-			<td  align="left">
-			<%= check_box_tag :beamer ,0,  @accommodation_unitrail.beamer %>
-			Beamer
-			<br>
-			</td>
-			<td  align="left">
-			<%= check_box_tag :grouproom ,0,  @accommodation_unitrail.grouproom %>
-			Gruppenraum
-			<br>
-			</td>
-		</tr>
-		<tr>
-			<td  align="left">
-			<%= check_box_tag :music_station,0,  @accommodation_unitrail.music_station %>
-			Musikanlage
-			<br>
-			</td>
-			<td  align="left">
-			<%= check_box_tag :bedding,0,  @accommodation_unitrail.bedding %>
-			Bettwäsche
-			<br>
-			</td>
-		</tr>
-		<tr>
-			<td  align="left">
-			<%= check_box_tag :dvd_player,0,  @accommodation_unitrail.dvd_player %>
-			DVD-Player
-			<br>
-			</td>
-			<td  align="left"></td>
-		</tr>
-		<tr>
-			<td ><h3>Freizeitbeschäftigungen</h3></td>
-			<td ></td>
-		</tr>
-		<tr>
-			<td  align="left">
-			<%= check_box_tag :playground,0,  @accommodation_unitrail.playground %>
-			Spielplatz
-			<br>
-			</td>
-			<td  align="left">
-			<%= check_box_tag :kicker ,0,  @accommodation_unitrail.kicker %>
-			Kicker
-			<br>
-			</td>
-		</tr>
-				<tr>
-			<td  align="left">
-			<%= check_box_tag :public_transfer,0,  @accommodation_unitrail.grill_area %>
-			Grillplatz
-			<br>
-			</td>
-			<td  align="left">
-				
-			<%= check_box_tag :public_transfer,0,  @accommodation_unitrail.campfire_area %>
-			Lagerfeuerstelle
-			<br>
-			</td>
-		</tr>
-					<tr>
-			<td  align="left">
-				
-			<%= check_box_tag :public_transfer,0,  @accommodation_unitrail.football_area %>
-			Fussballplatz
-			<br>
-			</td>
-			<td  align="left">
-				
-			<%= check_box_tag :public_transfer,0,  @accommodation_unitrail.gym %>
-			Turnhalle
-			<br>
-			</td>
-		</tr>
-		<tr>
-			<td  align="left">
-			<%= check_box_tag :table_tennis,0,  @accommodation_unitrail.table_tennis %>
-			Tischtennis
-			<br>
-			</td>
-			<td  align="left">
-			<%= check_box_tag :bowling,0,  @accommodation_unitrail.bowling %>
-			Bowling
-			<br>
-			</td>
-		</tr>
-		<tr>
-			<td  align="left">
-			<%= check_box_tag :horse_riding ,0,  @accommodation_unitrail.horse_riding %>
-			Reitmöglichkeit
-			<br>
-			</td>
-			<td  align="left">
-			<%= check_box_tag :natatorium ,0,  @accommodation_unitrail.natatorium %>
-			Schwimmhalle
-			<br>
-			</td>
-		</tr>
-		<tr>
-			<td  align="left">
-			<%= check_box_tag :outdoor_swimming_batd ,0,  @accommodation_unitrail.outdoor_swimming_bath %>
-			Freibad / See
-			<br>
-			</td>
-			<td>
-			<%= check_box_tag :outdoor_swimming_batd ,0,  @accommodation_unitrail.summer_coast %>
-			Sommerrodelbahn
-			</td>
-		</tr>
-		<tr>
-			<td ><h3>Behindertengerecht</h3></td>
-			<td ></td>
-		</tr>
-		<tr>
-			<td  align="left">
-			<%= check_box_tag :lifter ,0,  @accommodation_unitrail.lifter%>
-			Lifter
-			<br>
-			</td>
-			<td  align="left">
-				<%= check_box_tag :lifter ,0,  @accommodation_unitrail.weelchair_restricted %>
-				weelchair_restricted
-			</td>
-		</tr>
-		<tr>
-			<td  align="left">
-			<%= check_box_tag :coster_bed,0,  @accommodation_unitrail.coster_bed %>
-			Pflegebett
-			<br>
-			</td>
-			<td  align="left"></td>
-		</tr>
-		<tr>
-			<td  align="left">
-			<%= check_box_tag :wheelchair_accessible_bed,0,  @accommodation_unitrail.wheelchair_accessible_bed%>
-			rollstuhlgerechte Betten
-			<br>
-			</td>
-			<td ></td>
-		</tr>
-		<tr>
-			<td  align="left">
-			<%= check_box_tag :barrier_free ,0,  @accommodation_unitrail.barrier_free %>
-			Barrierefrei
-			<br>
-			</td>
-			<td  align="left"></td>
-		</tr>
-		<tr>
-			<td ><h3>Einrichtungen in der Nähe</h3></td>
-			<td ></td>
-		</tr>
-		<tr>
-			<td  align="left">
-			<%= check_box_tag :care_service ,0,  @accommodation_unitrail.care_service %>
-			Pflegedienst vor Ort
-			<br>
-			</td>
-			<td  align="left"></td>
-		</tr>
-		<tr>
-			<td  align="left">
-			<%= check_box_tag :shopping_facilities ,0,  @accommodation_unitrail.shopping_facilities %>
-			Einkaufmöglichkeiten (5km Radius)
-			<br>
-			</td>
-			<td  align="left"></td>
-		</tr>
-		<tr>
-			<td ><h3>Verpflegung</h3></td>
-			<td ></td>
-		</tr>
-		<tr>
-			<td  align="left">
-			<%= check_box_tag :full_board ,0,  @accommodation_unitrail.full_board %>
-			Vollpension
-			<br>
-			</td>
-			<td  align="left"></td>
-		</tr>
-		<tr>
-			<td  align="left">
-			<%= check_box_tag :self_supply,0,  @accommodation_unitrail.self_supply%>
-			Selbstversorgung
-			<br>
-			</td>
-			<td  align="left">
-			<%= check_box_tag :half_board ,0,  @accommodation_unitrail.half_board %>
-			Halbpension
-			<br>
-			</td>
-		</tr>
-		
+				<%= render :file => '/shared/_checkbox_entrys.html.erb' ,:locals => {:form => form}%>
+		<%end%>
 	</table>
 </div>
 </body>

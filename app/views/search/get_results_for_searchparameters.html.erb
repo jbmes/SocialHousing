@@ -37,7 +37,7 @@
     <td><h3> Name</h3></td>
 	<td><h3> Stadt</h3></td>
 	<td><h3> Internetadresse</h3></td>
-	<td><h3> Entf. zu Dresden</h3></td>
+	<td><h3> Entf. zu Dresden <%= link_to(image_tag( "expot.png"), {:controller => 'search', :action => 'change_sorting_of_results',:tmp_query =>  @tmp_query }) %></h3></td>
 	<td><h3> Aktion</h3></td>
    
 	</tr>
@@ -51,8 +51,8 @@
 	
 	<td><%= link_to "Details",:controller => "entry",:action => "show_entry",:id =>accommodation_unitrail.id %><br>
 		<%= link_to "Löschen",:controller => "entry",:action => "delete_entry",:id =>accommodation_unitrail.id ,:tmp_query =>  @tmp_query %><br>
-   		
-   		<a href="" target="_blank">Bearbeiten</a>
+   		<%= link_to "Bearbeiten",:controller => "entry",:action => "edit_entry",:id =>accommodation_unitrail.id %>
+   		<% puts accommodation_unitrail.id %>
    </td>
    
 	</tr>

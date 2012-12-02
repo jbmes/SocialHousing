@@ -5,13 +5,18 @@ Socialhousing::Application.routes.draw do
   
   post "search/get_results_for_searchparameters"
   get "search/get_results_for_searchparameters"
-  post "create_new_entry/create_entry_from_formdata"
+  post "create_new_entry/get_data_from_form"
+  post "search/get_data_from_form"
+  get "search/get_data_from_form"
   post "create/create_entry"
   get "entry/code_image"
+  get "search/change_sorting_of_results"
   
   get "entry/show_entry"
+  get "entry/edit_entry"
   get "entry/delete_entry"
-
+  get "entry/get_data_from_form"
+  put "entry/get_data_from_form"
   resources :accommodation_unitrails
 
   # The priority is based upon order of creation:

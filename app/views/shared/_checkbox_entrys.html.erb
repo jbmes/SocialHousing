@@ -1,0 +1,507 @@
+<tr>
+	<td  align="left">
+	<%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :winter_suitable,{checked: false} %><b>Winter geeignet</b>
+	<%else%>
+	<%= form.check_box :winter_suitable %><b>Winter geeignet</b>
+	<%end%>
+	
+	</td>
+	<td>
+		
+	</td>
+</tr>
+<tr>
+	<td ><h3>Zimmer</h3></td>
+	<td ></td>
+</tr>
+<tr>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :one_person_beth_rooms, {checked: false} %><b> Einzelzimmer</b>
+	<%else%>
+	<%= form.check_box :one_person_beth_rooms %><b> Einzelzimmer</b>
+	<%end%>
+	</td>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :two_person_beth_rooms, {checked: false} %><b> Doppelzimmer</b>
+	<%else%>
+	<%= form.check_box :two_person_beth_rooms %><b> Doppelzimmer</b>
+	<%end%>
+	</td>
+</tr>
+<tr>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :more_person_beth_rooms, {checked: false}%><b> Mehrbettzimmer</b>
+	<%else%>
+	<%= form.check_box :more_person_beth_rooms %><b> Mehrbettzimmer</b>
+	<%end%>
+	</td>
+	<td ></td>
+</tr>
+<tr>
+	<td ><h3>Verkehrsanbindung</h3></td>
+	<td ></td>
+</tr>
+<tr>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :public_transfer, {checked: false} %><b> öffentlich Verkehrsmittel</b>
+	<%else%>
+	<%= form.check_box :public_transfer %><b> öffentlich Verkehrsmittel</b>
+	<%end%>
+	</td>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :public_transfer_weelchair, {checked: false} %><b> örtliche Busunternehmen (Rollstuhlbuss)</b>
+	<%else%>
+	<%= form.check_box :public_transfer_weelchair %><b> örtliche Busunternehmen (Rollstuhlbuss)</b>
+	<%end%>
+	</td>
+</tr>
+<%if @searchstring.nil? %>
+<tr>
+	<td> Ansprechpartner öffentlich Verkehrsmittel</td>
+	<td> Ansprechpartner örtliche Busunternehmen (Rollstuhlbuss)</td>
+</tr>
+<tr>
+	<td >
+		
+		<%if @accommodation_unitrail.id.nil? %>
+	<%= form.text_area :public_transfer_note,:size => "20x10" %>
+	<%else%>
+	
+	<%= form.text_area :public_transfer_note,:size => "20x10" %>
+	<%end%>
+	</td>
+	<td >
+	
+		<%if @accommodation_unitrail.id.nil? %>
+	<%= form.text_area :public_transfer_weelchair_note,:size => "20x10" %>
+	<%else%>
+	<%= form.text_area :public_transfer_weelchair_note,:size => "20x10" %><%end%>
+	</td>
+</tr>
+<%end%>
+<tr>
+	<td ><h3>In Einrichtung vorhanden</h3></td>
+	<td ></td>
+</tr>
+<tr>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :internet, {checked: false} %><b> Internet</b>
+	<%else%>
+	<%= form.check_box :internet %><b> Internet</b>
+	<%end%>
+	</td>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= check_box :beamer, {checked: false} %><b> Beamer</b>
+	<%else%>
+	<%= form.check_box :beamer %><b> Beamer</b>
+	<%end%>
+	</td>
+</tr>
+<tr>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :television, {checked: false} %><b> Fernseher</b>
+	<%else%>
+	<%= form.check_box :television %><b> Fernseher</b>
+	<%end%>
+	</td>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :grouproom, {checked: false} %><b> Gruppenraum</b>
+	<%else%>
+	<%= form.check_box :grouproom %><b> Gruppenraum</b>
+	<%end%>
+	</td>
+</tr>
+<tr>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :music_station, {checked: false} %><b> Musikanlage</b>
+	<%else%>
+	<%= form.check_box :music_station %><b> Musikanlage</b>
+	<%end%>
+	</td>
+	<td ><%if@accommodation_unitrail.id.nil? %>
+	<%= form.check_box :dvd_player,{checked: false}%><b> DVD Player</b>
+	<%else%>
+	<%= form.check_box :dvd_player %><b> DVD Player</b>
+	<%end%>
+	</td>
+</tr>
+<tr>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :grill_area, {checked: false} %><b> Grillplatz</b>
+	<%else%>
+	<%= form.check_box :grill_area %><b> Grillplatz</b>
+	<%end%>
+	</td>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :football_area, {checked: false} %><b> Fussballplatz</b>
+	<%else%>
+	<%= form.check_box :football_area %><b> Fussballplatz</b>
+	<%end%>
+	</td>
+</tr>
+<tr>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :campfire_area, {checked: false} %><b> Lagerfeuerstelle</b>
+	<%else%>
+	<%= form.check_box :campfire_area %><b> Lagerfeuerstelle</b>
+	<%end%>
+	</td>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :gym, {checked: false} %><b> Turnhalle</b>
+	<%else%>
+	<%= form.check_box :gym %><b> Turnhalle</b>
+	<%end%>
+	</td>
+</tr>
+<tr>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :bedding, {checked: false} %><b> Bettwäsche</b>
+	<%else%>
+	<%= form.check_box :bedding %><b> Bettwäsche</b>
+	<%end%>
+	</td>
+</tr>
+<tr>
+	<td ><h3>Freizeitbeschäftigungen</h3></td>
+	<td ></td>
+</tr>
+<tr>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :table_tennis, {checked: false} %><b> Tischtennis</b>
+	<%else%>
+	<%= form.check_box :table_tennis %><b> Tischtennis</b>
+	<%end%>
+	</td>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :kicker, {checked: false} %><b> Kicker</b>
+	<%else%>
+	<%= form.check_box :kicker %><b> Kicker</b>
+	<%end%>
+	</td>
+</tr>
+<tr>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :bowling, {checked: false} %><b> Bowling</b>
+	<%else%>
+	<%= form.check_box :bowling %><b> Bowling</b>
+	<%end%>
+	</td>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :horse_riding, {checked: false} %><b> Reitmöglichkeiten</b>
+	<%else%>
+	<%= form.check_box :horse_riding %><b> Reitmöglichkeiten</b>
+	<%end%>
+	</td>
+</tr>
+<tr>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :summer_coast, {checked: false} %><b> Sommerrodelbahn</b>
+	<%else%>
+	<%= form.check_box :summer_coast %><b> Sommerrodelbahn</b>
+	<%end%>
+	</td>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :natatorium, {checked: false} %><b> Schwimmhalle</b>
+	<%else%>
+	<%= form.check_box :natatorium %><b> Schwimmhalle</b>
+	<%end%>
+	</td>
+</tr>
+<tr>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :outdoor_swimming_bath, {checked: false} %><b> Freibad/See</b>
+	<%else%>
+	<%= form.check_box :outdoor_swimming_bath %><b> Freibad/See</b>
+	<%end%>
+	</td>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :playground,{checked: false}%><b> Spielplatz</b>
+	<%else%>
+	<%= form.check_box :playground %><b> Spielplatz</b>
+	<%end%>
+	</td>
+</tr>
+<tr>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :minigolf, {checked: false} %><b> Minigolf</b>
+	<%else%>
+	<%= form.check_box :minigolf %><b> Minigolf</b>
+	<%end%>
+	</td>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :sauna,{checked: false}%><b> Sauna</b>
+	<%else%>
+	<%= form.check_box :sauna %><b> Sauna</b>
+	<%end%>
+	</td>
+</tr>
+<tr>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :fitness, {checked: false} %><b> Fitness</b>
+	<%else%>
+	<%= form.check_box :fitness %><b> Fitness</b>
+	<%end%>
+	</td>
+
+</tr>
+<tr>
+	<td ><h3>Behindertengerecht</h3></td>
+	<td ></td>
+</tr>
+<tr>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :lifter, {checked: false} %><b> Lifter</b>
+	<%else%>
+	<%= form.check_box :lifter %><b> Lifter</b>
+	<%end%>
+	</td>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :weelchair_restricted,{checked: false}%><b> Rollstuhl geeignet</b>
+	<%else%>
+	<%= form.check_box :weelchair_restricted %><b> Rollstuhl geeignet</b>
+	<%end%>
+	</td>
+</tr>
+<tr>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :barrier_free, {checked: false} %><b> Barrierefrei</b>
+	<%else%>
+	<%= form.check_box :barrier_free %><b> Barrierefrei</b>
+	<%end%>
+	</td>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :wheelchair_accessible_bed,{checked: false}%><b> Rollstuhl gerechte Betten</b>
+	<%else%>
+	<%= form.check_box :wheelchair_accessible_bed %><b> Rollstuhl gerechte Betten</b>
+	<%end%>
+	</td>
+</tr>
+<tr>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :coster_bed, {checked: false} %><b> Pflegebed</b>
+	<%else%>
+	<%= form.check_box :coster_bed %><b> Pflegebed</b>
+	<%end%>
+	</td>
+
+</tr>
+<tr>
+	<td ><h3>Einrichtungen in der Nähe</h3></td>
+	<td ></td>
+</tr>
+<tr>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :shopping_facilities, {checked: false} %><b> Einkaufsmöglichkeiten(5km Radius)</b>
+	<%else%>
+	<%= form.check_box :shopping_facilities %><b> Einkaufsmöglichkeiten(5km Radius)</b>
+	<%end%>
+	</td>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :care_service,{checked: false}%><b> Pflegedienst</b>
+	<%else%>
+	<%= form.check_box :care_service %><b> Pflegedienst</b>
+	<%end%>
+	</td>
+</tr>
+<%if @searchstring.nil? %>
+<tr>
+	<td></td>
+	<td>
+	<b> Ansprechpartner Pflegedienst</b>
+
+	</td>
+</tr>
+
+<tr>
+	<td></td>
+	<td>
+	<%if @accommodation_unitrail.id.nil? %>
+	<%= form.text_area :care_service_note,:size => "20x10" %>
+	<%else%>
+	<%= form.text_area :care_service_note,:size => "20x10" %>
+	<%end%>
+	</td>
+</tr>
+<%end%>
+<tr>
+	<td ><h3>Verpflegung</h3></td>
+	<td ></td>
+</tr>
+<tr>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :self_supply, {checked: false} %><b> Selbstversorgung</b>
+	<%else%>
+	<%= form.check_box :self_supply %><b> Selbstversorgung</b>
+	<%end%>
+	</td>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :full_board,{checked: false}%><b> Vollpension</b>
+	<%else%>
+	<%= form.check_box :full_board %><b> Vollpension</b>
+	<%end%>
+	</td>
+</tr>
+<tr>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :half_board, {checked: false} %><b> Halbpension</b>
+	<%else%>
+	<%= form.check_box :half_board %><b> Halbpension</b>
+	<%end%>
+	</td>
+
+</tr>
+<tr>
+	<td ><h3>Erlebnispädagogische Angebote</h3></td>
+	<td ></td>
+</tr>
+<tr>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :bicycle, {checked: false} %><b> Radfahren</b>
+	<%else%>
+	<%= form.check_box :bicycle %><b> Radfahren</b>
+	<%end%>
+	</td>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :climbing,{checked: false}%><b> Klettern</b>
+	<%else%>
+	<%= form.check_box :climbing %><b> Klettern</b>
+	<%end%>
+	</td>
+</tr>
+<tr>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :wander, {checked: false} %><b> Wandern</b>
+	<%else%>
+	<%= form.check_box :wander %><b> Wandern</b>
+	<%end%>
+	</td>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :ski,{checked: false}%><b> Ski</b>
+	<%else%>
+	<%= form.check_box :ski %><b> Ski</b>
+	<%end%>
+	</td>
+</tr>
+<tr>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :snowshoerunning, {checked: false} %><b> Schneeschuhlaufen</b>
+	<%else%>
+	<%= form.check_box :snowshoerunning %><b> Schneeschuhlaufen</b>
+	<%end%>
+	</td>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :paddle,{checked: false}%><b> Paddeln</b>
+	<%else%>
+	<%= form.check_box :paddle %><b> Paddeln</b>
+	<%end%>
+	</td>
+</tr>
+<tr>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :archery, {checked: false} %><b> Bogenschießen</b>
+	<%else%>
+	<%= form.check_box :archery %><b> Bogenschießen</b>
+	<%end%>
+	</td>
+</tr>
+<tr>
+	<td ><h3>Kreative Angebote</h3></td>
+	<td ></td>
+</tr>
+<tr>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :pottery, {checked: false} %><b> Töpfern</b>
+	<%else%>
+	<%= form.check_box :pottery %><b> Töpfern</b>
+	<%end%>
+	</td>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :frisk,{checked: false}%><b> Filzen</b>
+	<%else%>
+	<%= form.check_box :frisk %><b> Filzen</b>
+	<%end%>
+	</td>
+</tr>
+<tr>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :tinker, {checked: false} %><b> Basteln</b>
+	<%else%>
+	<%= form.check_box :tinker %><b> Basteln</b>
+	<%end%>
+	</td>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :glassblowing,{checked: false}%><b> Glasblasen</b>
+	<%else%>
+	<%= form.check_box :glassblowing %><b> Glasblasen</b>
+	<%end%>
+	</td>
+</tr>
+<tr>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :paint, {checked: false} %><b> Malen</b>
+	<%else%>
+	<%= form.check_box :paint %><b> Malen</b>
+	<%end%>
+	</td>
+
+</tr>
+<tr>
+	<td ><h3>Naturpädagogische Angebote</h3></td>
+	<td ></td>
+</tr>
+<tr>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :nature_trail, {checked: false} %><b> Naturlehrpfad</b>
+	<%else%>
+	<%= form.check_box :nature_trail %><b> Naturlehrpfad</b>
+	<%end%>
+	</td>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :kneip,{checked: false}%><b> Kneip</b>
+	<%else%>
+	<%= form.check_box :kneip %><b> Kneip</b>
+	<%end%>
+	</td>
+</tr>
+<tr>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :senseparcur, {checked: false} %><b> Sinnespakour</b>
+	<%else%>
+	<%= form.check_box :senseparcur %><b> Sinnespakour</b>
+	<%end%>
+	</td>
+
+</tr>
+<tr>
+	<td ><h3>Therapeutische Angebote</h3></td>
+	<td ></td>
+</tr>
+<tr>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :animals, {checked: false} %><b> Tiere</b>
+	<%else%>
+	<%= form.check_box :animals %><b> Tiere</b>
+	<%end%>
+	</td>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :music,{checked: false}%><b> Musik</b>
+	<%else%>
+	<%= form.check_box :music %><b> Musik</b>
+	<%end%>
+	</td>
+</tr>
+<tr>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :drumcircle, {checked: false} %><b> Trommeln</b>
+	<%else%>
+	<%= form.check_box :drumcircle %><b> Trommeln</b>
+	<%end%>
+	</td>
+	<td ><%if @accommodation_unitrail.id.nil? %>
+	<%= form.check_box :horse_riding,{checked: false}%><b> Reiten</b>
+	<%else%>
+	<%= form.check_box :horse_riding %><b> Reiten</b>
+	<%end%>
+	</td>
+</tr>

@@ -1,325 +1,67 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<title>Web Application</title>
-	<meta name="description" content="Web Application" />
-	<meta name="keywords" content="web, application" />
-	<%= stylesheet_link_tag "main.css"%>
-</head>
-<body>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<title>Web Application</title>
+		<meta name="description" content="Web Application" />
+		<meta name="keywords" content="web, application" />
+		<%= stylesheet_link_tag "main.css"%>
+	</head>
+	<body>
 
+		<div id="header">
+			<h1>Lebenshilfe Dresden e.V.</h1>
+			<ul id="menu">
+				<li class="active">
+					<a href="/search/find_entrys">Suche</a>
+				</li>
+				<li>
+					<a href="/create_new_entry/new_entry">Anlegen</a>
+				</li>
+			</ul>
+		</div>
 
-	<div id="header">
-		<h1>Lebenshilfe Dresden e.V.</h1>
-		<ul id="menu">
-			<li class="active"><a href="/search/find_entrys">Suche</a></li>
-			<li><a href="/create_new_entry/new_entry">Anlegen</a></li>
-			<li><a href="#">contact</a></li>
-		</ul>
-	</div>
+		<div class="wrap">
 
-<div class="wrap">
-	
-	
-<form action="/search/get_results_for_searchparameters" method="post">
-	<table >
-		<tr>
-		<td>	
-		<h3>Eigenschaften</h3>
-		</td>
-		<td>
-		</td>	
-  	</tr>
-  	 <tr>
-	  <td  align="left">			    
-	    <input type="text" name="distance_to_dresden"> max. Distanz zu Dresden <br>			  
-	  </td>
-	  <td  align="left">
-	  	<input type="text" name="amount_of_rooms"> Anzahl Räume <br>
-	  </td>
-  	</tr>
-	<tr>
-  		<tr>
-	  <td  align="left">
-	  				    
-	    	<input type="text" name="max_group_size"> max. Gruppengröße <br>		  
-	  </td>
-	  <td  align="left">
-	<%= collection_select(:federal_state, :id, Config_Values.all, :name, :value ,{:include_blank => true }) %>
-			 Bundesland
-	  </td>
-  	</tr>
-	<tr>
-	<tr>
-	  <td  align="left">			    
-	    <input type="text" name="amount_of_lebenshilfe_stars"> Anzahl Lebenshilfesterne <br>			  
-	  </td>
-	  <td  align="left">
-	  			<%= collection_select(:kind_of_house, :id, Config_Values.where(:topic=>'kind_of_house'), :name, :value,{:include_blank => true }) %>
-			Wohneinheitentyp
-	  </td>
-  	</tr>
-  	<tr>
-	  <td  align="left">			    
-	    	<input type="checkbox" name="winter_suitable" value="true">
-			Winter geeignet		  
-	  </td>
-	  <td  align="left">
-
-	  </td>
-  	</tr>
-  		<tr>
-			<td ><h3>Zimmer</h3></td>
-			<td ></td>
-		</tr>
-		<tr>
-			<td  align="left">
-			<input type="checkbox" name="one_person_beth_rooms" value="true">
-			Einbettzimmer
-			<br>
-			</td>
-			<td  align="left">
-			<input type="checkbox" name="two_person_beth_rooms" value="true">
-			Zweibettzimmer
-			<br>
-			</td>
-		</tr>
+			<%= form_for(@accommodation_unitrail, :url => { :controller => controller.controller_name , :action => "get_data_from_form" }, :multipart => true) do |form|  %>
+			<table >
 				<tr>
-			<td  align="left">
-			<input type="checkbox" name="more_person_beth_rooms" value="true">
-			Mehrbettzimmer
-			<br>
-			</td>
+					<td><h3>Eigenschaften</h3></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td  align="left"> <%= form.text_field :distance_to_dresden, :value => nil%>
+					Distance Dresden</td>
+					<td  align="left"> <%= form.text_field :amount_of_rooms, :value => nil%>
+					Anzahl Räume </td>
+				</tr>
+			
+					<tr>
+						<td  align="left"> <%= form.text_field :max_group_size, :value => nil%>
+						max. Gruppengröße </td>
+						<td  align="left"> <%= form.text_field :amount_of_lebenshilfe_stars, :value => nil%>
+						Anzahl Lebenshilfesterne </td>
+					</tr>
+		<tr>
 			<td  align="left">
 			
-			</td>
-		</tr>
-	<tr>
-		<td>	
-		<h3>Vehrkersanbindung</h3>
-		</td>
-		<td>
-		</td>	
-  	</tr>
-  	<tr>
-	  <td  align="left">			    
-	    <input type="checkbox" name="public_transfer_weelchair" value="true"> örtliche Busunternehmen (Rollstuhlbusse) <br>			  
-	  </td>
-	  <td  align="left">
-	  </td>
-  	</tr>
-  	<tr>
-		<td  align="left">			    
-		<input type="checkbox" name="public_transfer" value="true"> offentlich Verkehrsmittel <br>			  
-		  </td>
-		  <td  align="left">
-		</td>
-  	</tr>
-  	
-  	
-  	<tr>
-		<td>	
-		<h3>In Einrichtung vorhanden</h3>
-		</td>
-		<td>
-		</td>		
-  	</tr>
-  	<tr>
-	  <td  align="left">			    
-	    <input type="checkbox" name="internet" value="true"> Internet <br>			  
-	  </td>
-	  <td  align="left">
-  		<input type="checkbox" name="television" value="true"> Fernseher <br>
-	  </td>
-  	</tr>
-  	<tr>
-	  <td  align="left">			    
-	    <input type="checkbox" name="beamer" value="true"> Beamer <br>			  
-	  </td>
-	  <td  align="left">
-  		<input type="checkbox" name="grouproom" value="true"> Gruppenraum <br>
-	  </td>
-  	</tr>
-  	 <tr>
-	  <td  align="left">			    
-	    <input type="checkbox" name="music_station" value="true"> Musikanlage <br>			  
-	  </td>
-	  <td  align="left">
-  		<input type="checkbox" name="bedding" value="true"> Bettwäsche <br>
-	  </td>
-  	</tr>
-  	<tr>
-	  <td  align="left">			    
-	    <input type="checkbox" name="dvd_player" value="true"> DVD-Player <br>			  
-	  </td>
-	  <td  align="left">
-	  </td>
-  	</tr>
-  			</tr>
-				<tr>
-			<td  align="left">
-			<input type="checkbox" name="grill_area" value="true">
-			Grillplatz
-			<br>
-			</td>
-			<td  align="left">
-			<input type="checkbox" name="campfire_area" value="true">
-			Lagerfeuerstelle
-			<br>
-			</td>
-		</tr>
-					<tr>
-			<td  align="left">
-			<input type="checkbox" name="football_area" value="true">
-			Fussballplatz
-			<br>
-			</td>
-			<td  align="left">
-			<input type="checkbox" name="gym" value="true">
-			Turnhalle
-			<br>
-			</td>
-		</tr>
-	
-	
-	<tr>
-		<td>	
-		<h3>Freizeitbeschäftigungen</h3>
-		</td>
-		<td>
-		</td>			
-  	</tr>
-  	<tr>
-	  <td  align="left">			    
-	    <input type="checkbox" name="playground" value="true"> Spielplatz <br>			  
-	  </td>
-	  <td  align="left">
-  		<input type="checkbox" name="kicker" value="true"> Kicker <br>
-	  </td>
-  	</tr>
-  	<tr>
-	  <td  align="left">			    
-	    <input type="checkbox" name="table_tennis" value="true"> Tischtennis <br>			  
-	  </td>
-	  <td  align="left">
-  		<input type="checkbox" name="bowling" value="true"> Bowling <br>
-	  </td>
-  	</tr>
-  	 <tr>
-	  <td  align="left">			    
-	    <input type="checkbox" name="horse_riding" value="true"> Reitmöglichkeit <br>			  
-	  </td>
-	  <td  align="left">
-  		<input type="checkbox" name="natatorium" value="true"> Schwimmhalle <br>
-	  </td>
-  	</tr>
-  	<tr>
-	  <td  align="left">			    
-	    <input type="checkbox" name="outdoor_swimming_bath" value="true"> Freibad / See <br>			  
-	  </td>
-	  <td  align="left">
-  			<input type="checkbox" name="summer_coast" value="true">
-			Sommerrodelbahn
-	  </td>
-  	</tr>
-  	
+			<%= collection_select(:federal_state, :id, Config_Values.where(:topic=>'federal_state'), :name, :value,{:include_blank => true},{:multiple => true} )%>
 
-	 <tr>
-  			<td>	
-  			<h3>Behindertengerecht</h3>
-  			</td>
-  			<td>
-  			</td>	
-  	</tr>
-  	<tr>
-	  <td  align="left">			    
-	    <input type="checkbox" name="lifter" value="true"> Lifter <br>			  
-	  </td>
-	  <td  align="left">
-	  	<input type="checkbox" name="weelchair_restricted" value="true">
-			weelchair_restricted
-	  </td>
-  	</tr>
-  	<tr>
-	  <td  align="left">			    
-	    <input type="checkbox" name="coster_bed" value="true"> Pflegebett <br>			  
-	  </td>
-	  <td  align="left">
-	  </td>
-  	</tr>
-  	 <tr>
-	  <td  align="left">			    
-	    <input type="checkbox" name="wheelchair_accessible_bed" value="true"> rollstuhlgerechte Betten <br>			  
-	  </td>
-	  <td  align="left">
-	  </td>
-  	</tr>
-  	<tr>
-	  <td  align="left">			    
-	    <input type="checkbox" name="barrier_free" value="true"> Barrierefrei <br>			  
-	  </td>
-	  <td  align="left">
-  		
-	  </td>
-	</tr>
-	
-	
-	<tr>
-  			<td>	
-  			<h3>Einrichtungen in der Nähe</h3>
-  			</td>
-  			<td>
-  			</td>
-  			
-  	</tr>
-  	<tr>
-	  <td  align="left">			    
-	    <input type="checkbox" name="care_service" value="true"> Pflegedienst vor Ort <br>			  
-	  </td>
-	  <td  align="left">
-	  </td>
-  	</tr>
-  	<tr>
-	  <td  align="left">			    
-	    <input type="checkbox" name="shopping_facilities" value="true"> Einkaufmöglichkeiten (5km Radius) <br>			  
-	  </td>
-	  <td  align="left">
-	  </td>
-  	</tr>
-  	
-  	
-  	<tr>
-  			<td>	
-  			<h3>Verpflegung</h3>
-  			</td>
-  			<td>
-  			</td>
-  	</tr>
-  	<tr>
-	  <td  align="left">			    
-	    <input type="checkbox" name="full_board" value="true"> Vollpension <br>			  
-	  </td>
-	  <td  align="left">
-	  </td>
-  	</tr>
-  	<tr>
-	  <td  align="left">			    
-	    <input type="checkbox" name="self_supply" value="true"> Selbstversorgung <br>			  
-	  </td>
-	  <td  align="left">
-	  	<input type="checkbox" name="half_board" value="true"> Halbpension<br>	
-	  </td>
-  	</tr>
+			Bundesland
+			</td>
+			<td  align="left">
+			<%= collection_select(:kind_of_house, :id, Config_Values.where(:topic=>'kind_of_house'), :name, :value,{:include_blank => true},{:multiple => true}) %>
+			Wohneinheitentyp
+			</td>
+		</tr>
+		<tr>
+			<%= render :file => '/shared/_checkbox_entrys.html.erb' ,:locals => {:form => form}%>
+		<tr>
+			<td> <%= image_submit_tag("search32.png")%></td>
+		</tr>
+			</table>
+			<% end%>
 
-	<tr>
-		
-		<td> <%= image_submit_tag("search32.png")%></td>
-	</tr>
-  </table>
-  
-</form>
-</div>
-</body>
+		</div>
+	</body>
 </html>

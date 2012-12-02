@@ -1,3 +1,3 @@
 class Link < ActiveRecord::Base 
-  belongs_to :accommodation_unitrails
+  belongs_to :accommodation_unitrail
 end
