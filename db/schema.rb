@@ -96,6 +96,10 @@ ActiveRecord::Schema.define(:version => 20121025174225) do
     t.datetime "updated_at",                     :null => false
   end
 
+  create_table "basket", :force => true do |t|
+    t.integer "accommodation_unitrail_id"
+  end
+
   create_table "config_values", :force => true do |t|
     t.string "name"
     t.string "topic"

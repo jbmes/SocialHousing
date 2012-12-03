@@ -103,14 +103,18 @@ class CreateAccommodationUnitrails < ActiveRecord::Migration
       t.string :name
       t.string :link
       t.integer :accommodation_id  
-   end
-    
-      create_table :config_values do |t| 
-        t.string :name
-        t.string :topic
-        t.string :value
       end
-
+      
+      create_table "basket", :force => true do |t|
+        t.integer "accommodation_unitrail_id"
+      end    
+      
+      create_table "config_values", :force => true do |t|
+    t.string "name"
+    t.string "topic"
+    t.string "value"
+  end
+      
   end
   
 

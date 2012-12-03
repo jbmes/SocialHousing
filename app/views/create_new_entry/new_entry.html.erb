@@ -18,6 +18,7 @@
 		<ul id="menu">
 			<li ><a href="/search/find_entrys">Suche</a></li>
 			<li class="active"><a href="/create_new_entry/new_entry">Anlegen</a></li>
+			<li ><a href="/basket/show_entrys">Warenkorb</a></li>
 		</ul>
 	</div>
 <div class="wrap">
@@ -249,12 +250,18 @@
 
 		 
 		<tr>
+					<td  id="pop" style = "margin: 100px 40px 10px 70px>
+					<%= form.fields_for :links do |builder| %>
+					<div class="fields">
+					<%= render :partial => "/shared/link_field",:locals => { :form => builder} %>
+					<a href="JavaScript:void(0);" class="btn_removeLink">link entfernen</a>
+					</div>
 
-	
-		<tr>
-		
-		<td> <%= form.submit "Upload"%></td>
-	</tr>
+					<% end %>
+					<a href="JavaScript:void(0);" class="btn_addLink">link hinzufügen</a>
+					</td>
+
+				</tr>
 
 	</table>
 	
