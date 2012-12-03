@@ -249,7 +249,16 @@
 
 		 
 		<tr>
-
+			<td  style = "margin: 100px 40px 10px 70px>
+				<%= form.fields_for :links do |builder| %>
+				<div class="fields">
+				 <%= render :partial => "/shared/link_field",:locals => { :form => builder} %> 
+		 			</div>
+		 		<% end %>
+		 
+ 		 		<%= link_to_add_fields "add", form, :links %> 
+		 	
+			</td>
 	
 		<tr>
 		
