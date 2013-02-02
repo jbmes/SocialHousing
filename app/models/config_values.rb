@@ -1,2 +1,2 @@
-class Config_Values < ActiveRecord::Base 
+class Config_Values < ActiveRecord::Base
 end

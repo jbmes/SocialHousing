@@ -1,276 +1,278 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<title>Web Application</title>
-	<meta name="description" content="Web Application" />
-	<meta name="keywords" content="web, application" />
-	<%= javascript_include_tag "application" %>
-	<%= javascript_include_tag 'jquery_ujs' %>
-	<%= stylesheet_link_tag "main.css"%>
-	
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  <title>Web Application</title>
+  <meta name="description" content="Web Application"/>
+  <meta name="keywords" content="web, application"/>
+  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag 'jquery_ujs' %>
+  <%= stylesheet_link_tag "main.css" %>
+
 </head>
 <body>
 
-	<div id="header">
-		<h1>Lebenshilfe Dresden e.V.</h1>
-		<ul id="menu">
-			<li ><a href="/search/find_entrys">Suche</a></li>
-			<li class="active"><a href="/create_new_entry/new_entry">Anlegen</a></li>
-			<li ><a href="/basket/show_entrys">Warenkorb</a></li>
-		</ul>
-	</div>
+<div id="header">
+  <h1>Lebenshilfe Dresden e.V.</h1>
+  <ul id="menu">
+    <li><a href="/search/find_entrys">Suche</a></li>
+    <li class="active"><a href="/create_new_entry/new_entry">Anlegen</a></li>
+    <li><a href="/basket/show_entrys">Warenkorb</a></li>
+  </ul>
+</div>
 <div class="wrap">
-	
-	<%= form_for(@accommodation_unitrail, :url => { :controller => controller.controller_name , :action => "get_data_from_form" }) do |form|  %>
 
-     <table>
-     <tr>
-			<td><h3>Anschrift</h3> <div class="red">(Pflichtfelder*)</div></td>
-			<td>
-				
-			</td>
-		</tr>
-		<tr>
-			<td  align="left">
-			
-			<%unless @accommodation_unitrail.name.nil? %>
-			<%= form.text_field :name,:value => @accommodation_unitrail.name , :required => true%>
-			<%else%>
-			<%= form.text_field :name, :value => nil, :required => true %>
-			<%end%>
-			Name Einrichtung*
-			</td>
-			<td  align="left"></td>
-		</tr>
-		<tr>
-			<td  align="left">
-		
-			<%unless @accommodation_unitrail.name.nil? %>
-			<%= form.text_field :contact_person,:value => @accommodation_unitrail.contact_person , :required => true%>
-			<%else%>
-			<%= form.text_field :contact_person, :value => nil, :required => true %>
-			<%end%>
-			Ansprechpartner*
-			<br>
-			</td>
-			<td  align="left">
-			<%unless @accommodation_unitrail.name.nil? %>
-			<%= form.text_field :tel_contact_person,:value => @accommodation_unitrail.tel_contact_person, :required => true%>
-			<%else%>
-			<%= form.text_field :tel_contact_person, :value => nil, :required => true %>
-			<%end%>
-			Tel. Ansprechpartner*
-			</td>
-		</tr>
-		<tr>
-			<td  align="left">
-			<%unless @accommodation_unitrail.name.nil? %>
-			<%= form.text_field :street,:value => @accommodation_unitrail.street, :required => true%>
-			<%else%>
-			<%= form.text_field :street, :value => nil, :required => true %>
-			<%end%>
-			Straße*
-			</td>
-			<td  align="left">
-			<%unless @accommodation_unitrail.name.nil? %>
-			<%= form.text_field :house_number,:value => @accommodation_unitrail.house_number, :required => true%>
-			<%else%>
-			<%= form.text_field :house_number, :value => nil, :required => true %>
-			<%end%>
-			Hausnr.*
-			</td>
-		</tr>
-		<tr>
-			<td  align="left">
-			<%unless @accommodation_unitrail.name.nil? %>
-			<%= form.text_field :city,:value => @accommodation_unitrail.city, :required => true%>
-			<%else%>
-			<%= form.text_field :city, :value => nil, :required => true %>
-			<%end%>
-			Stadt*
-			<br>
-			</td>
-			<td  align="left">
-			<%unless @accommodation_unitrail.name.nil? %>
-			<%= form.text_field :postal_code,:value => @accommodation_unitrail.postal_code, :required => true%>
-			<%else%>
-			<%= form.text_field :postal_code, :value => nil, :required => true %>
-			<%end%>
-			Postleitzahl*
-			</td>
-		</tr>
-		<tr>
-			<td  align="left">
-			<%if @accommodation_unitrail.name.nil? %>
-			<%= form.collection_select(:federal_state,  Config_Values.where(:topic=>'federal_state'), :name, :value) %>
-			<%else%>
+<%= form_for(@accommodation_unitrail, :url => {:controller => controller.controller_name, :action => "get_data_from_form"}) do |form| %>
 
-			<%= form.collection_select(:federal_state, Config_Values.where(:topic=>'federal_state'), :name, :value) %>
-			<%end%>
-			Bundesland
-			</td>
-			<td  align="left">
-			<%if @accommodation_unitrail.name.nil? %>
-			<%= form.collection_select(:kind_of_house, Config_Values.where(:topic=>'kind_of_house'), :name, :value) %>
-			<%else%>
+    <table>
+    <tr>
+      <td><h3>Anschrift</h3>
 
-			<%= form.collection_select(:kind_of_house, Config_Values.where(:topic=>'kind_of_house'), :name, :value ) %>
-			<%end%>
-			Wohneinheitentyp
-			</td>
-		</tr>
-		<tr>
-			<td ><h3>Kontakt</h3></td>
-			<td ></td>
-		</tr>
-		<tr>
-			<td  align="left">
-			<%unless @accommodation_unitrail.name.nil? %>
-			<%= form.email_field :email,:value => @accommodation_unitrail.email, :required => true%>
-			<%else%>
-			<%= form.email_field :email, :value => nil, :required => true %>
-			<%end%>
-			Email
-			<br>
-			</td>
-			<td  align="left">
-			<%unless @accommodation_unitrail.name.nil? %>
-			<%= form.url_field :internetadress,:value => @accommodation_unitrail.internetadress%>
-			<%else%>
-			<%= form.url_field :internetadress, :value => nil %>
-			<%end%>
-			Internetadresse (http://www.beispiel.de)
-			<br>
-			</td>
-		</tr>
-		<tr></tr>
-		<tr>
-			<td ><h3>weitere Eigenschaften</h3></td>
-			<td ></td>
-		</tr>
-		<tr>
-			<td  align="left">
-				<p align="left">Beschreibung</p>
-			</td>		
-		</tr>
-		<tr>
-			<td  align="left">
-			<%unless @accommodation_unitrail.name.nil? %>
-			<%= form.text_area :description,:value => @accommodation_unitrail.description%>
-			<%else%>
-			<%= form.text_area :description, :value => nil%>
-			<%end%>
-			</td>		
-			<td  align="left">
-			</td>
-		</tr>
-				<tr>
-			<td  align="left">
-				<h3 align="left">Bettenplan</h3>
-			</td>		
-			<td  align="left">
-			<h3 align="left"> Foto</h3>
-			</td>
-		</tr>
-		<tr>
-			<td  align="left">
-			<%unless @accommodation_unitrail.name.nil? %>
-			<%= image_tag url_for(:controller => "entry", :action => "code_image", :id => @accommodation_unitrail.id,:category => "bedplan"),:size => "260x180"  %>
-			<%= form.file_field :bedplan%>
-			<%else%>
-			<%= form.file_field :bedplan%>
-			<%end%>
-			
-			</td>		
-			<td  align="left">
-			<%unless @accommodation_unitrail.name.nil? %>
-			<%= image_tag url_for(:controller => "entry", :action => "code_image", :id => @accommodation_unitrail.id,:category => "foto"),:size => "260x180"  %>
-			<%= form.file_field :foto%>
-			<%else%>
-			<%= form.file_field :foto%>
-			<%end%>
-			</td>
-		</tr>
+        <div class="red">(Pflichtfelder*)</div>
+      </td>
+      <td>
 
-				<tr>
-			<td  align="left">
-			<%unless @accommodation_unitrail.name.nil? %>
-			<%= form.text_field :amount_of_rooms,:value => @accommodation_unitrail.amount_of_rooms%>
-			<%else%>
-			<%= form.text_field :amount_of_rooms, :value => 1%>
-			<%end%>
-			Anz. Zimmer
-			</td>
-			<td  align="left">
-			<%unless @accommodation_unitrail.name.nil? %>
-			<%= form.text_field :max_group_size,:value => @accommodation_unitrail.max_group_size%>
-			<%else%>
-			<%= form.text_field :max_group_size, :value => 1%>
-			<%end%>
-			max. Gruppengröße
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<%unless @accommodation_unitrail.name.nil? %>
-			<%= form.number_field :amount_of_lebenshilfe_stars,:value => @accommodation_unitrail.amount_of_lebenshilfe_stars ,:in => 1...4%>
-			<%else%>
-			<%= form.number_field :amount_of_lebenshilfe_stars, :value => 1%>
-			<%end%>
-			Lebenshilfesterne
-			</td>
-		</tr>
-		<tr>
-			<td  align="left">
-			<%unless @accommodation_unitrail.name.nil? %>
-			<%= form.text_field :latitude,:value => @accommodation_unitrail.latitude%>
-			<%else%>
-			<%= form.text_field :latitude, :value => nil%>
-			<%end%>
-			latitude(optional)
-			</td>
-			<td  align="left">
-			<%unless @accommodation_unitrail.name.nil? %>
-			<%= form.text_field :longitude,:value => @accommodation_unitrail.longitude%>
-			<%else%>
-			<%= form.text_field :longitude, :value => nil%>
-			<%end%>
-			longitudelatitude(optional)
-			</td>
-		</tr>
-		
-		
-		 <%= render :file => '/shared/_checkbox_entrys.html.erb' ,:locals => {:form => form}%>
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
 
+        <% unless @accommodation_unitrail.name.nil? %>
+            <%= form.text_field :name, :value => @accommodation_unitrail.name, :required => true %>
+        <% else %>
+            <%= form.text_field :name, :value => nil, :required => true %>
+        <% end %>
+        Name Einrichtung*
+      </td>
+      <td align="left"></td>
+    </tr>
+    <tr>
+      <td align="left">
 
+        <% unless @accommodation_unitrail.name.nil? %>
+            <%= form.text_field :contact_person, :value => @accommodation_unitrail.contact_person, :required => true %>
+        <% else %>
+            <%= form.text_field :contact_person, :value => nil, :required => true %>
+        <% end %>
+        Ansprechpartner*
+        <br>
+      </td>
+      <td align="left">
+        <% unless @accommodation_unitrail.name.nil? %>
+            <%= form.text_field :tel_contact_person, :value => @accommodation_unitrail.tel_contact_person, :required => true %>
+        <% else %>
+            <%= form.text_field :tel_contact_person, :value => nil, :required => true %>
+        <% end %>
+        Tel. Ansprechpartner*
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <% unless @accommodation_unitrail.name.nil? %>
+            <%= form.text_field :street, :value => @accommodation_unitrail.street, :required => true %>
+        <% else %>
+            <%= form.text_field :street, :value => nil, :required => true %>
+        <% end %>
+        Straße*
+      </td>
+      <td align="left">
+        <% unless @accommodation_unitrail.name.nil? %>
+            <%= form.text_field :house_number, :value => @accommodation_unitrail.house_number, :required => true %>
+        <% else %>
+            <%= form.text_field :house_number, :value => nil, :required => true %>
+        <% end %>
+        Hausnr.*
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <% unless @accommodation_unitrail.name.nil? %>
+            <%= form.text_field :city, :value => @accommodation_unitrail.city, :required => true %>
+        <% else %>
+            <%= form.text_field :city, :value => nil, :required => true %>
+        <% end %>
+        Stadt*
+        <br>
+      </td>
+      <td align="left">
+        <% unless @accommodation_unitrail.name.nil? %>
+            <%= form.text_field :postal_code, :value => @accommodation_unitrail.postal_code, :required => true %>
+        <% else %>
+            <%= form.text_field :postal_code, :value => nil, :required => true %>
+        <% end %>
+        Postleitzahl*
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <% if @accommodation_unitrail.name.nil? %>
+            <%= form.collection_select(:federal_state, Config_Values.where(:topic => 'federal_state'), :name, :value) %>
+        <% else %>
+
+            <%= form.collection_select(:federal_state, Config_Values.where(:topic => 'federal_state'), :name, :value) %>
+        <% end %>
+        Bundesland
+      </td>
+      <td align="left">
+        <% if @accommodation_unitrail.name.nil? %>
+            <%= form.collection_select(:kind_of_house, Config_Values.where(:topic => 'kind_of_house'), :name, :value) %>
+        <% else %>
+
+            <%= form.collection_select(:kind_of_house, Config_Values.where(:topic => 'kind_of_house'), :name, :value) %>
+        <% end %>
+        Wohneinheitentyp
+      </td>
+    </tr>
+    <tr>
+      <td><h3>Kontakt</h3></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td align="left">
+        <% unless @accommodation_unitrail.name.nil? %>
+            <%= form.email_field :email, :value => @accommodation_unitrail.email, :required => true %>
+        <% else %>
+            <%= form.email_field :email, :value => nil, :required => true %>
+        <% end %>
+        Email
+        <br>
+      </td>
+      <td align="left">
+        <% unless @accommodation_unitrail.name.nil? %>
+            <%= form.url_field :internetadress, :value => @accommodation_unitrail.internetadress %>
+        <% else %>
+            <%= form.url_field :internetadress, :value => nil %>
+        <% end %>
+        Internetadresse (http://www.beispiel.de)
+        <br>
+      </td>
+    </tr>
+    <tr></tr>
+    <tr>
+      <td><h3>weitere Eigenschaften</h3></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td align="left">
+        <p align="left">Beschreibung</p>
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <% unless @accommodation_unitrail.name.nil? %>
+            <%= form.text_area :description, :value => @accommodation_unitrail.description %>
+        <% else %>
+            <%= form.text_area :description, :value => nil %>
+        <% end %>
+      </td>
+      <td align="left">
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <h3 align="left">Bettenplan</h3>
+      </td>
+      <td align="left">
+        <h3 align="left"> Foto</h3>
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <% unless @accommodation_unitrail.name.nil? %>
+            <%= image_tag url_for(:controller => "entry", :action => "code_image", :id => @accommodation_unitrail.id, :category => "bedplan"), :size => "260x180" %>
+            <%= form.file_field :bedplan %>
+        <% else %>
+            <%= form.file_field :bedplan %>
+        <% end %>
+
+      </td>
+      <td align="left">
+        <% unless @accommodation_unitrail.name.nil? %>
+            <%= image_tag url_for(:controller => "entry", :action => "code_image", :id => @accommodation_unitrail.id, :category => "foto"), :size => "260x180" %>
+            <%= form.file_field :foto %>
+        <% else %>
+            <%= form.file_field :foto %>
+        <% end %>
+      </td>
+    </tr>
+
+    <tr>
+      <td align="left">
+        <% unless @accommodation_unitrail.name.nil? %>
+            <%= form.text_field :amount_of_rooms, :value => @accommodation_unitrail.amount_of_rooms %>
+        <% else %>
+            <%= form.text_field :amount_of_rooms, :value => 1 %>
+        <% end %>
+        Anz. Zimmer
+      </td>
+      <td align="left">
+        <% unless @accommodation_unitrail.name.nil? %>
+            <%= form.text_field :max_group_size, :value => @accommodation_unitrail.max_group_size %>
+        <% else %>
+            <%= form.text_field :max_group_size, :value => 1 %>
+        <% end %>
+        max. Gruppengröße
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <% unless @accommodation_unitrail.name.nil? %>
+            <%= form.number_field :amount_of_lebenshilfe_stars, :value => @accommodation_unitrail.amount_of_lebenshilfe_stars, :in => 1...4 %>
+        <% else %>
+            <%= form.number_field :amount_of_lebenshilfe_stars, :value => 1 %>
+        <% end %>
+        Lebenshilfesterne
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <% unless @accommodation_unitrail.name.nil? %>
+            <%= form.text_field :latitude, :value => @accommodation_unitrail.latitude %>
+        <% else %>
+            <%= form.text_field :latitude, :value => nil %>
+        <% end %>
+        latitude(optional)
+      </td>
+      <td align="left">
+        <% unless @accommodation_unitrail.name.nil? %>
+            <%= form.text_field :longitude, :value => @accommodation_unitrail.longitude %>
+        <% else %>
+            <%= form.text_field :longitude, :value => nil %>
+        <% end %>
+        longitudelatitude(optional)
+      </td>
+    </tr>
 
 
-
-		 
-		<tr>
-					<td  id="pop" style = "margin: 100px 40px 10px 70px>
-					<%= form.fields_for :links do |builder| %>
-					<div class="fields">
-					<%= render :partial => "/shared/link_field",:locals => { :form => builder} %>
-					<a href="JavaScript:void(0);" class="btn_removeLink">link entfernen</a>
-					</div>
-
-					<% end %>
-					<a href="JavaScript:void(0);" class="btn_addLink">link hinzufügen</a>
-					</td>
-
-				</tr>
+    <%= render :file => '/shared/_checkbox_entrys.html.erb', :locals => {:form => form} %>
 
 
-	</table>
-	
 
-	<%unless @accommodation_unitrail.nil? %>
-		<%= form.hidden_field :user_id, :value => @accommodation_unitrail.id %>
-	<%end%>
+
+
+
+    <tr>
+      <td id="pop" style="margin: 100px 40px 10px 70px">
+        <%= form.fields_for :links do |builder| %>
+            <div class="fields">
+              <%= render :partial => "/shared/link_field", :locals => {:form => builder} %>
+              <a href="JavaScript:void(0);" class="btn_removeLink">link entfernen</a>
+            </div>
+
+        <% end %>
+        <a href="JavaScript:void(0);" class="btn_addLink">link hinzufügen</a>
+      </td>
+
+    </tr>
+
+
+    </table>
+
+
+    <% unless @accommodation_unitrail.nil? %>
+        <%= form.hidden_field :user_id, :value => @accommodation_unitrail.id %>
     <% end %>
+<% end %>
 
 
 </div>
