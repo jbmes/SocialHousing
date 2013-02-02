@@ -1,5 +1,6 @@
 class SearchController < ApplicationController
-
+  #needed for AJAX 
+  respond_to :html, :js
 
   def find_entrys
     @searchstring = "search"
@@ -137,4 +138,23 @@ class SearchController < ApplicationController
     render :template => 'search/get_results_for_searchparameters'
   end
 
+
+  
+   def insert
+     puts "hallo"
+    puts params[:accomodation_idc]
+    
+    
+    respond_to do |format|
+        format.js { render :layout=>false }
+    end
+  end
+  
+   def remove 
+    @clk = "you click me "
+    respond_to do |format|
+        format.js { render :layout=>false }
+    end
+  end
 end
+

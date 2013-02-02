@@ -14,15 +14,31 @@
 //= require jquery_ujs
 //= require_tree .
 
-function remove_fields(link) {
-  $(link).prev("input[type=hidden]").val("1");
-  $(link).closest(".fields").hide();
+$(document).ready(function(){
+	$('.btn_addLink').click(function () {
+	$("#pop").children("li").length
+	$('#pop').append("<div >link: <label> <input type = 'text' ><a href='JavaScript:void(0);' class='btn_removeLink'>Remove</a></label></div >");
+	});
+	
+	$('.btn_removeLink').live("click", function () {
+	$(this).parent().parent().remove()
+	});
+});
+
+
+$(function() {
+  if ($("#comments").length > 0) {
+    setTimeout(updateComments, 10000);
+  }
+});
+
+function updateComments () {
+  var article_id = $("#article").attr("data-id");
+  if ($(".comment").length > 0) {
+    var after = $(".comment:last-child").attr("data-time");
+  } else {
+    var after = "0";
+  }
+  $.getScript("/comments.js?article_id=" + article_id + "&after=" + after)
+  setTimeout(updateComments, 10000);
 }
-
-function add_fields(link, association, content) {  
-    var new_id = new Date().getTime();  
-    var regexp = new RegExp("new_" + association, "g");  
-    $(link).parent().before(content.replace(regexp, new_id));
-} 
-
-

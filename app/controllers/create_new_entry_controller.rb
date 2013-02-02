@@ -9,39 +9,68 @@ class CreateNewEntryController < ApplicationController
 
   def new_entry
     @accommodation_unitrail = AccommodationUnitrail.new
-    4.times { @accommodation_unitrail.links.build }
+    
   end
 
   def get_data_from_form
-    #id = CreateUnitFromForm::create_entry_from_formdata(params)
-    params[:accommodation_unitrail].delete :user_id
-
-
-    foto_bedplan = reactforPics(params, "bedplan")
-    foto_foto = reactforPics(params, "foto")
-
-
-    @accommodation_unitrail = AccommodationUnitrail.create(params[:accommodation_unitrail])
-    adress = params[:accommodation_unitrail][:city] + " " + params[:accommodation_unitrail][:street] + " " + params[:accommodation_unitrail][:house_number].to_s + " " + params[:accommodation_unitrail][:postal_code].to_s
-    geo_vals = Geocoder.coordinates(adress.to_s)
-
-    unless geo_vals.nil?
-      distance = calculate_distance(geo_vals[0], geo_vals[1], @dresden_latitude.to_f, @dresden_longitude.to_f)
-      @accommodation_unitrail.latitude = geo_vals[0]
-      @accommodation_unitrail.longitude = geo_vals[1]
-      @accommodation_unitrail.distance = distance
-      @accommodation_unitrail.save!
+    
+     if params[:add_ingredient]
+      # rebuild the ingredient attributes that doesn't have an id
+      unless params[:recipe][:ingredients_attributes].blank?
+    for attribute in params[:recipe][:ingredients_attributes]
+      @recipe.ingredients.build(attribute.last.except(:_destroy)) unless attribute.last.has_key?(:id)
     end
-
-    unless foto_bedplan.nil?
-      foto_bedplan.accommodation_id = @accommodation_unitrail.id
-      foto_bedplan.save
+      end
+      # add one more empty ingredient attribute
+      @recipe.ingredients.build
+    elsif params[:remove_ingredient]
+      # collect all marked for delete ingredient ids
+      removed_ingredients = params[:recipe][:ingredients_attributes].collect { |i, att| att[:id] if (att[:id] && att[:_destroy].to_i == 1) }
+      # physically delete the ingredients from database
+      Ingredient.delete(removed_ingredients)
+      flash[:notice] = "Ingredients removed."
+      for attribute in params[:recipe][:ingredients_attributes]
+        # rebuild ingredients attributes that doesn't have an id and its _destroy attribute is not 1
+        @recipe.ingredients.build(attribute.last.except(:_destroy)) if (!attribute.last.has_key?(:id) && attribute.last[:_destroy].to_i == 0)
+      end
+    else
+      # save goes like usual
+      # if @recipe.update_attributes(params[:recipe])
+        # flash[:notice] = "Successfully updated recipe."
+        # redirect_to @recipe and return
+      # end
     end
-    unless foto_foto.nil?
-      foto_foto.accommodation_id = @accommodation_unitrail.id
-      foto_foto.save
-    end
-    redirect_to :controller => "entry", :action => "show_entry", :id => @accommodation_unitrail.id
+    
+    
+        #id = CreateUnitFromForm::create_entry_from_formdata(params)
+       params[:accommodation_unitrail].delete  :user_id
+       
+       
+       foto_bedplan = reactforPics(params,"bedplan")
+       foto_foto = reactforPics(params,"foto")
+       
+       
+       @accommodation_unitrail = AccommodationUnitrail.create(params[:accommodation_unitrail])
+       adress = params[:accommodation_unitrail][:city] + " " + params[:accommodation_unitrail][:street] + " " + params[:accommodation_unitrail][:house_number].to_s + " " + params[:accommodation_unitrail][:postal_code].to_s
+       geo_vals = Geocoder.coordinates(adress.to_s)
+       
+       unless geo_vals.nil?
+         distance = calculate_distance(geo_vals[0], geo_vals[1], @dresden_latitude.to_f, @dresden_longitude.to_f)
+         @accommodation_unitrail.latitude = geo_vals[0]
+         @accommodation_unitrail.longitude = geo_vals[1]
+         @accommodation_unitrail.distance = distance
+         @accommodation_unitrail.save!
+       end
+        
+        unless foto_bedplan.nil?
+          foto_bedplan.accommodation_id = @accommodation_unitrail.id
+          foto_bedplan.save
+        end
+        unless foto_foto.nil?
+          foto_foto.accommodation_id = @accommodation_unitrail.id
+          foto_foto.save
+        end
+       redirect_to :controller => "entry", :action => "show_entry", :id => @accommodation_unitrail.id
 
   end
 

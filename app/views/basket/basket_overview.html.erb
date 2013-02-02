@@ -1,0 +1,78 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>Web Application</title>
+	<meta name="description" content="Web Application" />
+	<meta name="keywords" content="web, application" />
+	<%= stylesheet_link_tag "main.css"%>
+	<%= javascript_include_tag "application" %>
+</head>
+<body>
+
+
+	<div id="header">
+		<h1>Lebenshilfe Dresden e.V.</h1>
+		<ul id="menu">
+			<li><a href="/search/find_entrys">Suche</a></li>
+			<li><a href="/create_new_entry/new_entry">Anlegen</a></li>
+			<li class="active"><a href="/basket/show_entrys">Warenkorb</a></li>
+		</ul>
+	</div>
+
+<div class="wrap">
+
+
+<p>Es wurden <%= @results_amount %> Wohneinheiten gefunden.</p>
+	<table border="1" cellspacing="0" cellpadding="4" width="100%">
+		<colgroup>
+		<col width="4*" />
+		<col width="2*" />
+		<col width="1*" />
+		<col width="1*" />
+		<col width="1*" />
+		<col width="1*" />
+		</colgroup>
+	
+	<tr>
+    <td><h3> Name</h3></td>
+	<td><h3> Stadt</h3></td>
+	<td><h3> Telefon</h3></td>
+	<td><h3> Internetadresse</h3></td>
+	<td><h3> Entf. zu Dresden <%= link_to(image_tag( "expot.png"), {:controller => 'search', :action => 'change_sorting_of_results',:tmp_query =>  @tmp_query }) %></h3></td>
+	<td><h3> Aktion</h3></td>
+   
+	</tr>
+	<% unless @results.nil? %>
+		<% @results.each do |accommodation_unitrail| %>
+	
+		<tr>
+	    <td><%= accommodation_unitrail.name %></td>
+		<td><%= accommodation_unitrail.city %></td>
+		<td><%= accommodation_unitrail.tel_contact_person %></td>
+		<td><a href="<%= accommodation_unitrail.internetadress %>" target="_blank"><%= accommodation_unitrail.internetadress %></a></td>
+		<td><%= '%.2f' %accommodation_unitrail.distance unless accommodation_unitrail.distance.nil? %>km</td>
+		
+		<td><%= link_to "Details",:controller => "entry",:action => "show_entry",:id =>accommodation_unitrail.id %><br>
+			<%= link_to "Löschen",:controller => "entry",:action => "delete_entry",:id =>accommodation_unitrail.id ,:tmp_query =>  @tmp_query %><br>
+	   		<%= link_to "Bearbeiten",:controller => "entry",:action => "edit_entry",:id =>accommodation_unitrail.id %>
+	   		<% puts accommodation_unitrail.id %>
+	   </td>
+	   <td >
+		   <%= link_to "click here", {:action=>"clickme"}, {:remote => true, :id=>"clk"} %>
+		
+			<div id="allclick">
+			    <%= render :partial => 'goclick'  %>
+			</div> 
+		</td>
+	   
+		</tr>
+		
+		<% end %>
+	<% end %>
+</table>
+
+</div>
+</body>
+</html>
