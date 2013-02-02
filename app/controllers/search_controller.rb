@@ -146,8 +146,15 @@ class SearchController < ApplicationController
 
   
    def insert
-     puts "hallo"
-    puts params[:accomodation_idc]
+     
+   
+    
+    
+     @results_entrys_in_basket = ActiveRecord::Base.connection.select_all( "SELECT * FROM basket where accommodation_unitrail_id = '#{params[:accomodation_idc]}'" )
+      
+       if @results_entrys_in_basket.size == 0
+         ActiveRecord::Base.connection.execute("INSERT INTO basket VALUES('#{params[:accomodation_idc]}','#{params[:accomodation_idc]}')")
+        end
     
     
     respond_to do |format|
@@ -156,6 +163,11 @@ class SearchController < ApplicationController
   end
   
    def remove 
+     
+       @results_entrys_in_basket = ActiveRecord::Base.connection.select_all( "SELECT * FROM basket where accommodation_unitrail_id = '#{params[:accomodation_idc]}'" )
+       if @results_entrys_in_basket.size == 0
+         ActiveRecord::Base.connection.execute("DELETE FROM basket WHERE accommodation_unitrail_id = '#{params[:accomodation_idc]}'")
+        end
     @clk = "you click me "
     respond_to do |format|
         format.js { render :layout=>false }

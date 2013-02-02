@@ -64,7 +64,7 @@
 
 	   	<%unless @in_basket.nil?%>
 		   	<div id="insert">
-			    <%= render :partial => 'add_to_basket', :locals=>{:accomodation_id => '50' },  %>
+			    <%= render :partial => 'add_to_basket', :locals => {:accomodation_id => accommodation_unitrail.id } %>
 			</div>
 		<% else %>
 			<div id="remove">
@@ -74,7 +74,7 @@
 			
 
 		<div id="insert" style="display:none">
-		    <%= render :partial => 'add_to_basket'  %>
+		   <%= render :partial => 'add_to_basket', :locals => {:accomodation_id => accommodation_unitrail.id } %>
 		</div>
 			
 		<div id="remove" style="display:none">
