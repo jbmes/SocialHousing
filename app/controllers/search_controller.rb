@@ -9,7 +9,7 @@ class SearchController < ApplicationController
 
   def get_data_from_form
     query_strg = ""
-    if !params.has_key?(:tmp_query)
+    unless params.has_key?(:tmp_query)
       unless params[:accommodation_unitrail][:distance_to_dresden] == ""
         query_strg = "#{query_strg}#{"distance"} <= '#{params[:accommodation_unitrail][:distance_to_dresden]}'"
       end
@@ -117,7 +117,7 @@ class SearchController < ApplicationController
     end
 
 
-    #logger.info query_strg
+ 
     @tmp_query = query_strg
 
     @results = AccommodationUnitrail.where(@tmp_query)
@@ -141,32 +141,31 @@ class SearchController < ApplicationController
 
   
    def insert
-     
-   
-    
-    
-     @results_entrys_in_basket = ActiveRecord::Base.connection.select_all( "SELECT * FROM basket where accommodation_unitrail_id = '#{params[:accomodation_idc]}'" )
+      @results_entrys_in_basket = ActiveRecord::Base.connection.select_all( "SELECT * FROM basket where accommodation_unitrail_id = '#{params[:accomodation_idc]}'" )
+      @id = params[:accomodation_idc]
+      if @results_entrys_in_basket.size == 0
+           ActiveRecord::Base.connection.execute("INSERT INTO basket VALUES('#{params[:accomodation_idc]}','#{params[:accomodation_idc]}')")
       
-       if @results_entrys_in_basket.size == 0
-         ActiveRecord::Base.connection.execute("INSERT INTO basket VALUES('#{params[:accomodation_idc]}','#{params[:accomodation_idc]}')")
-        end
-    
-    
-    respond_to do |format|
-        format.js { render :layout=>false }
-    end
+      end
+      
+      respond_to do |format|
+          format.html
+          format.js { render :layout=>false }
+      end
   end
   
-   def remove 
-     
-       @results_entrys_in_basket = ActiveRecord::Base.connection.select_all( "SELECT * FROM basket where accommodation_unitrail_id = '#{params[:accomodation_idc]}'" )
-       if @results_entrys_in_basket.size == 0
-         ActiveRecord::Base.connection.execute("DELETE FROM basket WHERE accommodation_unitrail_id = '#{params[:accomodation_idc]}'")
-        end
-    @clk = "you click me "
-    respond_to do |format|
-        format.js { render :layout=>false }
-    end
+  def remove  
+      @results_entrys_in_basket = ActiveRecord::Base.connection.select_all( "SELECT * FROM basket where accommodation_unitrail_id = '#{params[:accomodation_idc]}'" )
+      @id = params[:accomodation_idc]
+      if @results_entrys_in_basket.size > 0
+          ActiveRecord::Base.connection.execute("DELETE FROM basket WHERE accommodation_unitrail_id = '#{params[:accomodation_idc]}'")
+      end
+  
+      respond_to do |format|
+          format.html
+          format.js { render :layout=>false }
+      end
   end
+  
 end
 

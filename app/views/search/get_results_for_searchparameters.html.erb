@@ -42,6 +42,7 @@
 	<td><h3> Internetadresse</h3></td>
 	<td><h3> Entf. zu Dresden <%= link_to(image_tag( "expot.png"), {:controller => 'search', :action => 'change_sorting_of_results',:tmp_query =>  @tmp_query }) %></h3></td>
 	<td><h3> Aktion</h3></td>
+	<td><h3> Warenkorb</h3></td>
    
 	</tr>
 	<% unless @results.nil? %>
@@ -60,27 +61,28 @@
 	   		<% puts accommodation_unitrail.id %>
 	   </td>
 	   <td >
-	   	<% @in_basket = AccommodationUnitrail.find_by_id(accommodation_unitrail.id ) %>
-
-	   	<%unless @in_basket.nil?%>
-		   	<div id="insert">
+	   	<% @results_entrys_in_basket = ActiveRecord::Base.connection.select_all( "SELECT * FROM basket where accommodation_unitrail_id = '#{accommodation_unitrail.id}'" )%>
+	   	<%if @results_entrys_in_basket.size == 0 %>
+		<div id="insert<%= accommodation_unitrail.id %>">
 			    <%= render :partial => 'add_to_basket', :locals => {:accomodation_id => accommodation_unitrail.id } %>
-			</div>
+		</div>
+		<div id="remove<%= accommodation_unitrail.id %>" style="display:none">
+		    <%= render :partial => 'remove_from_basket', :locals => {:accomodation_id => accommodation_unitrail.id } %>
+		</div> 
+				
 		<% else %>
-			<div id="remove">
+			<div id="remove<%= accommodation_unitrail.id %>">
 			    <%= render :partial => 'remove_from_basket', :locals => {:accomodation_id =>accommodation_unitrail.id } %>
 			</div> 
+		<div id="insert<%= accommodation_unitrail.id %>" style="display:none">
+		   <%= render :partial => 'add_to_basket', :locals => {:accomodation_id => accommodation_unitrail.id } %>
+		</div>
 		<% end %>
 			
 
-		<div id="insert" style="display:none">
-		   <%= render :partial => 'add_to_basket', :locals => {:accomodation_id => accommodation_unitrail.id } %>
-		</div>
+
 			
-		<div id="remove" style="display:none">
-		    <%= render :partial => 'remove_from_basket'  %>
-		</div> 
-				
+
 			
 			
 

@@ -2,14 +2,13 @@ class BasketController < ApplicationController
   
     
   def show_entrys
-    
-    
-    @results_entrys_in_basket = ActiveRecord::Base.connection.select_all( "SELECT * FROM basket" )
-      query_strg = "accommodation_unitrail_id in (#{@results_entrys_in_basket})"
-      @accommodation_unitrail = AccommodationUnitrail.where('id in (?)',@results_entrys_in_basket)
-      @results_amount = @accommodation_unitrail.size
-
-    render :template=>  'basket/basket_overview'
+    accomodation_unitrails = []
+    ActiveRecord::Base.connection.execute( "SELECT * FROM basket" ) .each do |accomodation_id|
+        accomodation_unitrails << accomodation_id[0]
+     end   
+     @results = AccommodationUnitrail.where('id in (?)',accomodation_unitrails)
+     @results_amount = @results.size
+     render :template=>  'basket/basket_overview'
   end
   
 end

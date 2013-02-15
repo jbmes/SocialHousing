@@ -245,12 +245,8 @@
 
 
     <%= render :file => '/shared/_checkbox_entrys.html.erb', :locals => {:form => form} %>
-
-
-
-
-
-
+    
+    
     <tr>
       <td id="pop" style="margin: 100px 40px 10px 70px">
         <%= form.fields_for :links do |builder| %>
@@ -259,13 +255,24 @@
               <a href="JavaScript:void(0);" class="btn_removeLink">link entfernen</a>
             </div>
 
+ 
         <% end %>
-        <a href="JavaScript:void(0);" class="btn_addLink">link hinzufügen</a>
+        <a href="JavaScript:void(0);" class="btn_addLink">link hinzufÃ¼gen</a>
       </td>
 
     </tr>
 
 
+
+
+
+
+
+
+
+	<tr>
+		<td> <%= form.submit "Upload"%></td>
+ 	</tr>
     </table>
 
 

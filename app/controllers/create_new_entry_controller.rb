@@ -71,7 +71,6 @@ class CreateNewEntryController < ApplicationController
           foto_foto.save
         end
        redirect_to :controller => "entry", :action => "show_entry", :id => @accommodation_unitrail.id
-
   end
 
 
@@ -88,7 +87,6 @@ class CreateNewEntryController < ApplicationController
     unless params[:accommodation_unitrail][piccategory].nil?
       pic = Photo.find(:all, :conditions => {:accommodation_id => params[:id], :category => piccategory})
       unless pic.nil?
-
         pic.each do |entry|
           Photo.find_by_id(entry.id).destroy
         end

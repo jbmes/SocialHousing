@@ -1,7 +1,11 @@
+jQuery(document).ready(function($){
+	
 
-$('#insert').click(function(){
-  $('#insert').hide(function(){
-  	$("#remove").show();
+$('#insert<%= @id %>').click(function(){
+  $('#insert<%= @id %>').hide(function(){
+  	$("#remove<%= @id %>").show();
 	});
-  
+  return false;
 });
+
+}

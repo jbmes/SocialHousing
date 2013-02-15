@@ -1,6 +1,7 @@
-$('#remove').click(function(){
-  $('#remove').hide(function(){
-  	$("#insert").show();
+$('#remove<%= @id %>').click(function(event){
+
+  $('#remove<%= @id %>').hide(function(){
+  	$("#insert<%= @id %>").show();
 	});
-  
+  return false;
 });
