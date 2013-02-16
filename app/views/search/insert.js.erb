@@ -1,11 +1,18 @@
-jQuery(document).ready(function($){
+function toggleLinks(){
 	
-
-$('#insert<%= @id %>').click(function(){
-  $('#insert<%= @id %>').hide(function(){
-  	$("#remove<%= @id %>").show();
+	$('#insert<%= @id %>').click(function(){
+        $('#insert<%= @id %>').hide(function(){
+  	        $("#remove<%= @id %>").show();
+	    });
 	});
-  return false;
-});
+		$('#remove<%= @id %>').click(function(){
+            $('#remove<%= @id %>').hide();
+  	        $("#remove<%= @id %>").show();
+  		    return false;
+        });
+};
 
-}
+$(window).load(function(){	
+
+ toggleLinks();
+});

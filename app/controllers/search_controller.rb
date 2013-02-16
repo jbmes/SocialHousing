@@ -123,7 +123,9 @@ class SearchController < ApplicationController
     @results = AccommodationUnitrail.where(@tmp_query)
     @results_amount = @results.size
 
+     @results_entrys_in_basket = ActiveRecord::Base.connection.select_all( "SELECT * FROM basket where accommodation_unitrail_id = '#{params[:accomodation_idc]}'" )
     render :template => 'search/get_results_for_searchparameters'
+    logger.info "################################################dddddddddddddddddddd###########################################################################"
   end
 
   def change_sorting_of_results
@@ -147,7 +149,7 @@ class SearchController < ApplicationController
            ActiveRecord::Base.connection.execute("INSERT INTO basket VALUES('#{params[:accomodation_idc]}','#{params[:accomodation_idc]}')")
       
       end
-      
+     
       respond_to do |format|
           format.html
           format.js { render :layout=>false }
@@ -160,7 +162,7 @@ class SearchController < ApplicationController
       if @results_entrys_in_basket.size > 0
           ActiveRecord::Base.connection.execute("DELETE FROM basket WHERE accommodation_unitrail_id = '#{params[:accomodation_idc]}'")
       end
-  
+    
       respond_to do |format|
           format.html
           format.js { render :layout=>false }

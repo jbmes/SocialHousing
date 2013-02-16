@@ -8,6 +8,7 @@
 	<meta name="keywords" content="web, application" />
 	<%= stylesheet_link_tag "main.css"%>
 	<%= javascript_include_tag "application" %>
+		<%= javascript_include_tag "toggle" %>
 </head>
 <body>
 
@@ -61,29 +62,23 @@
 	   		<% puts accommodation_unitrail.id %>
 	   </td>
 	   <td >
-	   	<% @results_entrys_in_basket = ActiveRecord::Base.connection.select_all( "SELECT * FROM basket where accommodation_unitrail_id = '#{accommodation_unitrail.id}'" )%>
-	   	<%if @results_entrys_in_basket.size == 0 %>
-		<div id="insert<%= accommodation_unitrail.id %>">
-			    <%= render :partial => 'add_to_basket', :locals => {:accomodation_id => accommodation_unitrail.id } %>
-		</div>
-		<div id="remove<%= accommodation_unitrail.id %>" style="display:none">
-		    <%= render :partial => 'remove_from_basket', :locals => {:accomodation_id => accommodation_unitrail.id } %>
-		</div> 
-				
-		<% else %>
-			<div id="remove<%= accommodation_unitrail.id %>">
+	
+	   <p>	<%= @results_entrys_in_basket.size %></p>
+	   	<div style="visibility: hidden;" id="isInBasket<%= accommodation_unitrail.id %>"><%= @results_entrys_in_basket.size %></div>
+			<!--div id="insert<%= accommodation_unitrail.id %>">
+				    <%= render :partial => 'add_to_basket', :locals => {:accomodation_id => accommodation_unitrail.id } %>
+			</div-->
+	
+				<%= link_to "zum Warenkorb", {:action => "insert",:accomodation_idc => "#{accommodation_unitrail.id}"}, {:remote => true, :id=>"insert#{accommodation_unitrail.id}" }%>
+		        <%= link_to "aus Warenkorb entfernen", {:action=>"remove",:accomodation_idc => "#{accommodation_unitrail.id}"}, {:remote => true, :id=>"remove#{accommodation_unitrail.id}"} %>
+			<!--div id="remove<%= accommodation_unitrail.id %>">
 			    <%= render :partial => 'remove_from_basket', :locals => {:accomodation_id =>accommodation_unitrail.id } %>
-			</div> 
-		<div id="insert<%= accommodation_unitrail.id %>" style="display:none">
-		   <%= render :partial => 'add_to_basket', :locals => {:accomodation_id => accommodation_unitrail.id } %>
-		</div>
-		<% end %>
-			
+			</div--> 
+
+		
 
 
-			
-
-			
+	
 			
 
 
