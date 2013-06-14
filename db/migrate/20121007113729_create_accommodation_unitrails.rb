@@ -16,7 +16,7 @@ class CreateAccommodationUnitrails < ActiveRecord::Migration
       t.integer :amount_of_rooms
       t.string :email
       t.string :federal_state
-      
+
       t.float :latitude
       t.float :longitude
       t.float :distance
@@ -26,7 +26,7 @@ class CreateAccommodationUnitrails < ActiveRecord::Migration
       t.boolean :table_tennis
       t.boolean :kicker
       t.boolean :playground
-      
+
       t.boolean :bedding
       t.boolean :grouproom
       t.boolean :internet
@@ -34,16 +34,16 @@ class CreateAccommodationUnitrails < ActiveRecord::Migration
       t.boolean :music_station
       t.boolean :television
       t.boolean :beamer
-      
+
       t.boolean :natatorium
       t.boolean :outdoor_swimming_bath
-      
+
       t.boolean :barrier_free
       t.boolean :wheelchair_accessible_bed
       t.boolean :coster_bed
       t.boolean :lifter
       t.boolean :weelchair_restricted
-      
+
       t.boolean :public_transfer
       t.string  :public_transfer_note
       t.boolean :public_transfer_weelchair
@@ -51,7 +51,7 @@ class CreateAccommodationUnitrails < ActiveRecord::Migration
       t.boolean :shopping_facilities
       t.boolean :care_service
       t.string :care_service_note
-      
+
       t.boolean :self_supply
       t.boolean :full_board
       t.boolean :half_board
@@ -85,37 +85,37 @@ class CreateAccommodationUnitrails < ActiveRecord::Migration
       t.boolean :frisk
       t.boolean :glassblowing
       t.boolean :paint
-      
+
       t.timestamps
     end
-    
-      create_table :photos do |t| 
-      t.string :description 
+
+      create_table :photos do |t|
+      t.string :description
       t.string :content_type
-      t.string :category 
-      t.string :filename 
+      t.string :category
+      t.string :filename
       t.binary :binary_data
       t.integer :accommodation_id
       end
-      
-      create_table :links do |t| 
-      t.string :description 
+
+      create_table "links", :force => true do  |t|
+      t.string :description
       t.string :name
       t.string :link
-      t.integer :accommodation_id  
+     # t.integer :accommodation_unitrail_id
       end
-      
+
       create_table "basket", :force => true do |t|
         t.integer "accommodation_unitrail_id"
-      end    
-      
+      end
+
       create_table "config_values", :force => true do |t|
     t.string "name"
     t.string "topic"
     t.string "value"
   end
-      
+
   end
-  
+
 
 end

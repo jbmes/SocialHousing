@@ -4,12 +4,14 @@ class EntryController < ApplicationController
 
   def show_entry
     @accommodation_unitrail = AccommodationUnitrail.find_by_id(params[:id])
+    getLinks(params[:id])
   end
 
 
   def edit_entry
 
     @accommodation_unitrail = AccommodationUnitrail.find_by_id(params[:id])
+    getLinks(params[:id])
     render :template => 'create_new_entry/new_entry'
   end
 
@@ -31,7 +33,7 @@ class EntryController < ApplicationController
     end
 
     #after deleting entry in database use old query to request search again
-    redirect_to :controller => "search", :action => "get_data_from_form", :tmp_query => params[:tmp_query]
+    redirect_to :controller => params[:last_controller], :action => "show_entrys", :tmp_query => params[:tmp_query]
   end
 
 
@@ -43,6 +45,11 @@ class EntryController < ApplicationController
 
 
       @accommodation_unitrail = AccommodationUnitrail.find(params[:accommodation_unitrail][:user_id])
+
+      link_1 = reactforLinks(params)
+
+
+
       unless foto_bedplan.nil?
         foto_bedplan.accommodation_id = @accommodation_unitrail.id
         foto_bedplan.save
@@ -51,6 +58,16 @@ class EntryController < ApplicationController
         foto_foto.accommodation_id = @accommodation_unitrail.id
         foto_foto.save
       end
+
+      i = 0
+      link_1.each do |name|
+        link_1[i].accommodation_unitrail_id= @accommodation_unitrail.id
+        link_1[i].save
+
+        i = i + 1
+      end
+
+      getLinks(@accommodation_unitrail.id)
       params[:accommodation_unitrail].delete :user_id
       @accommodation_unitrail.update_attributes(params[:accommodation_unitrail])
 
@@ -68,6 +85,9 @@ class EntryController < ApplicationController
     end
 
   end
+
+
+
 
   def reactforPics(params, piccategory, id)
 
@@ -102,6 +122,44 @@ class EntryController < ApplicationController
     dy = 111.3 * (latitude_1 - latitude_2)
     #lat1, lat2, lon1, lon2: Breite, Länge in Grad
     distance = Math.sqrt(dx * dx + dy * dy)
+  end
+
+  def getLinks(id)
+    link =  Link.find_all_by_accommodation_unitrail_id(id)
+
+    @Links = []
+    i = 0
+    link.each do |name|
+
+      @Links[i] =       {'link' =>name.link,'description' =>name.description}
+      i = i + 1
+    end
+
+
+
+  end
+
+  def reactforLinks(params)
+
+    links = Link.find_all_by_accommodation_unitrail_id(params[:accommodation_unitrail][:user_id])
+    unless links.nil?
+
+      links.each do |entry|
+        Link.find_by_id(entry.id).destroy
+      end
+    end
+    a = []
+    for i in 0..4 do
+      unless params[:accommodation_unitrail][:"link_#{i}_description"].nil?
+        a[i] = Link.new
+        a[i].description= params[:accommodation_unitrail][:"link_#{i}_description"]
+        a[i].link=  params[:accommodation_unitrail][:"link_#{i}"]
+
+        params[:accommodation_unitrail].delete "link_#{i}_description"
+        params[:accommodation_unitrail].delete "link_#{i}"
+      end
+    end
+    a
   end
 
 

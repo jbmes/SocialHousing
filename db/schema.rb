@@ -110,7 +110,6 @@ ActiveRecord::Schema.define(:version => 20121025174225) do
     t.string  "description"
     t.string  "name"
     t.string  "link"
-    t.integer "accommodation_id"
     t.integer "accommodation_unitrail_id"
   end
 

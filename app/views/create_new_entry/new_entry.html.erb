@@ -242,25 +242,48 @@
         longitudelatitude(optional)
       </td>
     </tr>
+    <tr>
+      <td align="left">
+        <h3 align="left">Links-Attraktionen</h3>
+      </td>
+      <td align="left">
+
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        <a>Beschreibung</a>
+      </td>
+      <td align="left">
+        <a>Link</a>
+      </td>
+    </tr>
+    <%  for i in 0..4 do %>
+        <tr>
+          <td align="left">
+            <% unless @Links.nil? %>
+                <%= form.text_area :"link_#{i}_description", :value => @Links[i]['description'] %>
+            <% else %>
+                <%= form.text_field :"link_#{i}_description", :value => nil %>
+            <% end %>
+          </td>
+          <td align="left">
+            <% unless @Links.nil?  %>
+                <%= form.text_field :"link_#{i}", :value => @Links[i]['link'] %>
+            <% else %>
+                <%= form.text_field :"link_#{i}", :value => nil %>
+            <% end %>
+          </td>
+        </tr>
+    <%end %>
+
+
+
 
 
     <%= render :file => '/shared/_checkbox_entrys.html.erb', :locals => {:form => form} %>
     
     
-    <tr>
-      <td id="pop" style="margin: 100px 40px 10px 70px">
-        <%= form.fields_for :links do |builder| %>
-            <div class="fields">
-              <%= render :partial => "/shared/link_field", :locals => {:form => builder} %>
-              <a href="JavaScript:void(0);" class="btn_removeLink">link entfernen</a>
-            </div>
-
- 
-        <% end %>
-        <a href="JavaScript:void(0);" class="btn_addLink">link hinzufÃ¼gen</a>
-      </td>
-
-    </tr>
 
 
 

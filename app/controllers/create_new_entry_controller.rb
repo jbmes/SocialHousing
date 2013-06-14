@@ -13,41 +13,11 @@ class CreateNewEntryController < ApplicationController
   end
 
   def get_data_from_form
-    
-     if params[:add_ingredient]
-      # rebuild the ingredient attributes that doesn't have an id
-      unless params[:recipe][:ingredients_attributes].blank?
-    for attribute in params[:recipe][:ingredients_attributes]
-      @recipe.ingredients.build(attribute.last.except(:_destroy)) unless attribute.last.has_key?(:id)
-    end
-      end
-      # add one more empty ingredient attribute
-      @recipe.ingredients.build
-    elsif params[:remove_ingredient]
-      # collect all marked for delete ingredient ids
-      removed_ingredients = params[:recipe][:ingredients_attributes].collect { |i, att| att[:id] if (att[:id] && att[:_destroy].to_i == 1) }
-      # physically delete the ingredients from database
-      Ingredient.delete(removed_ingredients)
-      flash[:notice] = "Ingredients removed."
-      for attribute in params[:recipe][:ingredients_attributes]
-        # rebuild ingredients attributes that doesn't have an id and its _destroy attribute is not 1
-        @recipe.ingredients.build(attribute.last.except(:_destroy)) if (!attribute.last.has_key?(:id) && attribute.last[:_destroy].to_i == 0)
-      end
-    else
-      # save goes like usual
-      # if @recipe.update_attributes(params[:recipe])
-        # flash[:notice] = "Successfully updated recipe."
-        # redirect_to @recipe and return
-      # end
-    end
-    
-    
-        #id = CreateUnitFromForm::create_entry_from_formdata(params)
+
        params[:accommodation_unitrail].delete  :user_id
-       
-       
        foto_bedplan = reactforPics(params,"bedplan")
        foto_foto = reactforPics(params,"foto")
+       links = reactforLinks(params)
        
        
        @accommodation_unitrail = AccommodationUnitrail.create(params[:accommodation_unitrail])
@@ -61,7 +31,13 @@ class CreateNewEntryController < ApplicationController
          @accommodation_unitrail.distance = distance
          @accommodation_unitrail.save!
        end
-        
+       #Links
+       for i in 0..4 do
+         links["#{i}".to_i].accommodation_unitrail_id= @accommodation_unitrail.id
+         links["#{i}".to_i].save
+       end
+
+
         unless foto_bedplan.nil?
           foto_bedplan.accommodation_id = @accommodation_unitrail.id
           foto_bedplan.save
@@ -102,6 +78,21 @@ class CreateNewEntryController < ApplicationController
       params[:accommodation_unitrail].delete piccategory
       @photo
     end
+  end
+
+  def reactforLinks(params)
+    a = []
+    for i in 0..4 do
+      unless params[:accommodation_unitrail][:"link_#{i}_description"].nil?
+        a[i] = Link.new
+        a[i].description= params[:accommodation_unitrail][:"link_#{i}_description"]
+        a[i].link=  params[:accommodation_unitrail][:"link_#{i}"]
+
+        params[:accommodation_unitrail].delete "link_#{i}_description"
+        params[:accommodation_unitrail].delete "link_#{i}"
+      end
+    end
+    a
   end
 
 

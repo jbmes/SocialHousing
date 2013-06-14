@@ -6,9 +6,11 @@
 	<title>Web Application</title>
 	<meta name="description" content="Web Application" />
 	<meta name="keywords" content="web, application" />
+
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+
 	<%= stylesheet_link_tag "main.css"%>
-	<%= javascript_include_tag "application" %>
-		<%= javascript_include_tag "toggle" %>
 </head>
 <body>
 
@@ -57,32 +59,16 @@
 		<td><%= '%.2f' %accommodation_unitrail.distance unless accommodation_unitrail.distance.nil? %>km</td>
 		
 		<td><%= link_to "Details",:controller => "entry",:action => "show_entry",:id =>accommodation_unitrail.id %><br>
-			<%= link_to "Löschen",:controller => "entry",:action => "delete_entry",:id =>accommodation_unitrail.id ,:tmp_query =>  @tmp_query %><br>
+			<%= link_to "Löschen",:controller => "entry",:action => "delete_entry",:id =>accommodation_unitrail.id ,:tmp_query =>  @tmp_query,:last_controller =>  'search' %><br>
 	   		<%= link_to "Bearbeiten",:controller => "entry",:action => "edit_entry",:id =>accommodation_unitrail.id %>
 	   		<% puts accommodation_unitrail.id %>
 	   </td>
 	   <td >
-	
-	   <p>	<%= @results_entrys_in_basket.size %></p>
-	   	<div style="visibility: hidden;" id="isInBasket<%= accommodation_unitrail.id %>"><%= @results_entrys_in_basket.size %></div>
-			<!--div id="insert<%= accommodation_unitrail.id %>">
-				    <%= render :partial => 'add_to_basket', :locals => {:accomodation_id => accommodation_unitrail.id } %>
-			</div-->
-	
-				<%= link_to "zum Warenkorb", {:action => "insert",:accomodation_idc => "#{accommodation_unitrail.id}"}, {:remote => true, :id=>"insert#{accommodation_unitrail.id}" }%>
-		        <%= link_to "aus Warenkorb entfernen", {:action=>"remove",:accomodation_idc => "#{accommodation_unitrail.id}"}, {:remote => true, :id=>"remove#{accommodation_unitrail.id}"} %>
-			<!--div id="remove<%= accommodation_unitrail.id %>">
-			    <%= render :partial => 'remove_from_basket', :locals => {:accomodation_id =>accommodation_unitrail.id } %>
-			</div--> 
-
-		
-
-
-	
-			
-
-
-  
+            <%if @in_basket.include?("#{accommodation_unitrail.id}".to_i) %>
+                 <%= link_to "aus Warenkorb entfernen", :action=>"remove",:accomodation_idc => "#{accommodation_unitrail.id}", :id=>"remove#{accommodation_unitrail.id}", :tmp_query=>  @tmp_query %>
+             <% else %>
+                 <%= link_to "zum Warenkorb", :action => "insert",:accomodation_idc =>"#{accommodation_unitrail.id}",:id =>"insert#{accommodation_unitrail.id}",:tmp_query=>  @tmp_query  %>
+             <% end %>
 		</td>
 	   
 		</tr>

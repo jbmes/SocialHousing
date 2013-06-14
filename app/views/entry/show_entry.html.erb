@@ -119,40 +119,76 @@
 			</td>
 		</tr>
 		<tr>
-			<td  align="left">
-				<p class="entry_sections">Beschreibung:</p>
-			</td>		
-			<td  align="left">
-				<p class="entry_sections"> Entfernung u. Maps</p>
-				</td>
-		</tr>
-		<tr>
-			<td  VALIGN="top">	
-			<textarea  rows="10" cols="20" readonly="readonly" disabled="disabled"><%= @accommodation_unitrail.description %></textarea>
-			</td>	
-			<td  align="left">
-			
-				<%= image_tag "http://maps.google.com/maps/api/staticmap?zoom=14&size=300x300&maptype=roadmap&markers=#{@accommodation_unitrail.latitude},#{@accommodation_unitrail.longitude}&sensor=false" %>
-			</td>
-		</tr>
-		<tr>
-			<td  align="left">
-				<p class="entry_sections">Bettenplan</p>
-			</td>		
-			<td  align="left">
-				<p class="entry_sections"> Bild Einrichtung</p>
-				</td>
-		</tr>
+      <td  align="left">
+        <p class="entry_sections">Beschreibung:</p>
+      </td>
+      <td  align="left">
+        <p class="entry_sections"> Entfernung u. Maps</p>
+      </td>
+    </tr>
+      <tr>
+        <td  VALIGN="top">
+          <textarea  rows="10" cols="20" readonly="readonly" disabled="disabled"><%= @accommodation_unitrail.description %></textarea>
+        </td>
+        <td  align="left">
+
+          <%= image_tag "http://maps.google.com/maps/api/staticmap?zoom=14&size=300x300&maptype=roadmap&markers=#{@accommodation_unitrail.latitude},#{@accommodation_unitrail.longitude}&sensor=false" %>
+        </td>
+      </tr>
+      <tr>
+
+
+        <td  align="left">
+          <p class="entry_sections">Bettenplan</p>
+        </td>
+        <td  align="left">
+          <p class="entry_sections"> Bild Einrichtung</p>
+        </td>
+      </tr>
+
+
+
 		<tr>
 			<td>
 				
 				<%= image_tag url_for(:controller => "entry", :action => "code_image", :id => @accommodation_unitrail.id,:category => "bedplan"),:size => "260x180" %>
 			</td>
-						<td>
+			<td>
 				
 				<%= image_tag url_for(:controller => "entry", :action => "code_image", :id => @accommodation_unitrail.id,:category => "foto"),:size => "260x180" %>
 			</td>
 		</tr>
+
+      <tr>
+        <td align="left">
+          <h3 align="left">Links Attraktionen</h3>
+        </td>
+        <td align="left">
+
+        </td>
+      </tr>
+
+      <%  for i in 0..4 do %>
+          <tr>
+            <td align="left">
+
+              <% unless @accommodation_unitrail.name.nil? %>
+                  <% if @Links[i].nil? %>
+                      <a>nicht gesetzt</a>
+                  <% else %>
+                      <%=  @Links[i]['description'] %>
+                  <% end %>
+              <% end %>
+            </td>
+            <td align="left">
+              <% if @Links[i].nil? %>
+                  <a>nicht gesetzt</a>
+              <% else %>
+                  <a   href="<%=@Links[i]['link']%>" target="_blank"> <%= @Links[i]['link'] %>   </a>
+              <% end %>
+            </td>
+          </tr>
+      <%end %>
 
 			<%= form_for(@accommodation_unitrail, :url => { :controller => controller.controller_name , :action => "get_data_from_form" }, :multipart => true) do |form|  %>
 			

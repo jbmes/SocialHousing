@@ -1,13 +1,90 @@
 class SearchController < ApplicationController
-  #needed for AJAX 
-  respond_to :html, :js
 
   def find_entrys
     @searchstring = "search"
     @accommodation_unitrail = AccommodationUnitrail.new
   end
 
-  def get_data_from_form
+  def show_entrys
+
+    @tmp_query = query_builder params
+    @results_entrys_in_basket = get_result_for_query @tmp_query
+    @in_basket = ActiveRecord::Base.connection.select_values( "SELECT accommodation_unitrail_id FROM basket" )
+
+    get_result_for_query  params[:tmp_query]
+
+    render :template => 'search/get_results_for_searchparameters'
+  end
+
+
+  def change_sorting_of_results
+    @tmp_query = params[:tmp_query]
+    @in_basket = ActiveRecord::Base.connection.select_values( "SELECT accommodation_unitrail_id FROM basket" )
+
+
+    if Rails.cache.read('order_search') == 0
+      @results = AccommodationUnitrail.where(@tmp_query).order("distance").reverse_order
+      Rails.cache.write('order_search', 1)
+    else
+      @results = AccommodationUnitrail.where(@tmp_query).order("distance")
+      Rails.cache.write('order_search', 0)
+    end
+    render :template => 'search/get_results_for_searchparameters'
+  end
+
+
+
+   def insert
+
+      results_entrys_in_basket = ActiveRecord::Base.connection.select_all( "SELECT * FROM basket where accommodation_unitrail_id = '#{params[:accomodation_idc]}'" )
+      @id = params[:accomodation_idc]
+      if results_entrys_in_basket.size == 0
+           ActiveRecord::Base.connection.execute("INSERT INTO basket VALUES('#{params[:accomodation_idc]}','#{params[:accomodation_idc]}')")
+
+      end
+      @in_basket = ActiveRecord::Base.connection.select_values( "SELECT accommodation_unitrail_id FROM basket" )
+      @tmp_query = params[:tmp_query]
+      @results_entrys_in_basket = get_result_for_query @tmp_query
+
+      get_result_for_query  params[:tmp_query]
+
+      render :template => 'search/get_results_for_searchparameters'
+
+  end
+
+  def remove
+    results_entrys_in_basket = ActiveRecord::Base.connection.select_all( "SELECT * FROM basket where accommodation_unitrail_id = '#{params[:accomodation_idc]}'" )
+      @id = params[:accomodation_idc]
+      if results_entrys_in_basket.size > 0
+          ActiveRecord::Base.connection.execute("DELETE FROM basket WHERE accommodation_unitrail_id = '#{params[:accomodation_idc]}'")
+      end
+    @in_basket = ActiveRecord::Base.connection.select_values( "SELECT accommodation_unitrail_id FROM basket" )
+    @tmp_query = params[:tmp_query]
+    get_result_for_query  params[:tmp_query]
+    @results_entrys_in_basket = get_result_for_query @tmp_query
+    render :template => 'search/get_results_for_searchparameters'
+
+  end
+
+  private
+
+  def prepare_arrays  result
+    @results_entrys_in_basket = result
+    @in_basket = ActiveRecord::Base.connection.select_values( "SELECT accommodation_unitrail_id FROM basket" )
+
+    render :template => 'search/get_results_for_searchparameters'
+  end
+
+  def get_result_for_query tmp_query
+    if Rails.cache.read('order_search') == 0
+      @results = AccommodationUnitrail.where(tmp_query).order("distance").reverse_order
+    else
+      @results = AccommodationUnitrail.where(tmp_query).order("distance")
+    end
+    @results_amount = @results.size
+  end
+
+  def query_builder params
     query_strg = ""
     unless params.has_key?(:tmp_query)
       unless params[:accommodation_unitrail][:distance_to_dresden] == ""
@@ -115,58 +192,7 @@ class SearchController < ApplicationController
     else
       query_strg = params[:tmp_query]
     end
-
-
- 
-    @tmp_query = query_strg
-
-    @results = AccommodationUnitrail.where(@tmp_query)
-    @results_amount = @results.size
-
-     @results_entrys_in_basket = ActiveRecord::Base.connection.select_all( "SELECT * FROM basket where accommodation_unitrail_id = '#{params[:accomodation_idc]}'" )
-    render :template => 'search/get_results_for_searchparameters'
-    logger.info "################################################dddddddddddddddddddd###########################################################################"
-  end
-
-  def change_sorting_of_results
-    @tmp_query = params[:tmp_query]
-    if Rails.cache.read("order") == 0
-      @results = AccommodationUnitrail.where(@tmp_query).order("distance")
-      Rails.cache.write("order", 1)
-    else
-      @results = AccommodationUnitrail.where(@tmp_query).order("distance").reverse
-      Rails.cache.write("order", 0)
-    end
-    render :template => 'search/get_results_for_searchparameters'
-  end
-
-
-  
-   def insert
-      @results_entrys_in_basket = ActiveRecord::Base.connection.select_all( "SELECT * FROM basket where accommodation_unitrail_id = '#{params[:accomodation_idc]}'" )
-      @id = params[:accomodation_idc]
-      if @results_entrys_in_basket.size == 0
-           ActiveRecord::Base.connection.execute("INSERT INTO basket VALUES('#{params[:accomodation_idc]}','#{params[:accomodation_idc]}')")
-      
-      end
-     
-      respond_to do |format|
-          format.html
-          format.js { render :layout=>false }
-      end
-  end
-  
-  def remove  
-      @results_entrys_in_basket = ActiveRecord::Base.connection.select_all( "SELECT * FROM basket where accommodation_unitrail_id = '#{params[:accomodation_idc]}'" )
-      @id = params[:accomodation_idc]
-      if @results_entrys_in_basket.size > 0
-          ActiveRecord::Base.connection.execute("DELETE FROM basket WHERE accommodation_unitrail_id = '#{params[:accomodation_idc]}'")
-      end
-    
-      respond_to do |format|
-          format.html
-          format.js { render :layout=>false }
-      end
+    query_strg
   end
   
 end
